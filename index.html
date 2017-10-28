@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -64,6 +64,63 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-angularjs-data-bind" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/27/angularjs-data-bind/" class="article-date">
+  <time datetime="2017-10-27T13:36:26.000Z" itemprop="datePublished">2017-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/27/angularjs-data-bind/">简述Angularjs的数据绑定</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Angularjs数据绑定"><a href="#Angularjs数据绑定" class="headerlink" title="Angularjs数据绑定"></a>Angularjs数据绑定</h1><p>最近我们团队在编写教程，因该说是边学习变讲解。刚刚完成了angualrjs数据绑定的部分的教程编写，在这里做下记录。</p>
+<h2 id="单项数据绑定"><a href="#单项数据绑定" class="headerlink" title="单项数据绑定"></a>单项数据绑定</h2><p><code>angualr</code> 有两种数据绑定得到方式来实现 <code>V层</code> 与 <code>C层</code> 之间数据的绑定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">  angular.module(<span class="string">'bindExample'</span>, [])</div><div class="line">    .controller(<span class="string">'ExampleController'</span>, [<span class="string">'$scope'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</div><div class="line">      <span class="variable">$scope</span>.name = <span class="string">'Whirled'</span>;</div><div class="line">    &#125;]);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div ng-controller=<span class="string">"ExampleController"</span>&gt;</div><div class="line">	&lt;p&gt;&#123;&#123;name&#125;&#125;&lt;/p&gt;</div><div class="line">	Hello &lt;span ng-bind=<span class="string">"name"</span>&gt;&lt;/span&gt;!</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>上述代码中，一种数据绑定的方式是用双花括号， 其中的name会与 <code>controller</code>中的 <code>$scope.name</code> 的name进行绑定。</p>
+<p>另一种方式是使用angular的内置指令 <code>ng-bind</code> 来实现绑定。<code>controller</code> 中的变量会与 <code>ng-bind=&quot;name&quot;</code> 中的name进行绑定。</p>
+<p><img src="/image/2017-10-27.1.png" alt="data-bind"></p>
+<p>可以看到，我们的变量已经在显示出来了，说明我们成功的绑定了变量数据。</p>
+<p><strong>区别：</strong></p>
+<p>虽然说这两种方式都可以进行数据绑定，但是他们还是有一定的区别的。</p>
+<p>由于我们在进行web项目开发的时候，很多情况下我们的页面会优先加载 <code>index.html</code> 文件，我们的html代码就放在这个文件下。所以这种情况下， 使用 `` 可能会造成页面渲染还没有完成，而显示我们的原始代码的问题。 </p>
+<p>而使用 <code>ng-bind</code> 就不会有这种问题，他会等到页面渲染完成后在将最终的结果显示出来。</p>
+<h2 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h2><p><code>angularjs</code> 的一个核心概念，<strong><em>双向数据绑定</em></strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">  angular.module(<span class="string">'bindExample'</span>, [])</div><div class="line">    .controller(<span class="string">'ExampleController'</span>, [<span class="string">'$scope'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</div><div class="line">      <span class="variable">$scope</span>.name = <span class="string">'Whirled'</span>;</div><div class="line">    &#125;]);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div ng-controller=<span class="string">"ExampleController"</span>&gt;</div><div class="line">  &lt;label&gt;Enter name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">"name"</span>&gt;&lt;/label&gt;&lt;br&gt;</div><div class="line">  Hello &lt;span ng-bind=<span class="string">"name"</span>&gt;&lt;/span&gt;!</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>可以看到，我们又添加了一个 <code>input</code> 输入框，用 <code>ng-model</code> 来绑定controller中 <code>$scope.name</code> 的name变量。</p>
+<p><img src="/image/ngbind.gif" alt="towdatabind"></p>
+<p>当我们在input中输入时，神奇的现象发生了。我们发现，下面的内容也跟着改变了。</p>
+<p><code>angularjs</code> 在我们进行输入时，<code>&lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;</code> 中的name发生改变，这时，它会马上通知controller中 <code>$scope.name</code> 的name，让他改变。同样的，<code>$scope.name</code> 的name发生了改变，也会立即通知V层双花括号中的 <code>name</code>。<br>所以数据传输的顺序应该是V层-&gt;C层-&gt;V层。</p>
+<p>我们把这种V-&gt;C-&gt;V的现象叫做双向数据绑定。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文中，我只对双向数据绑定做了最简单的示例，它还有很多很有趣的功能。相信在以后的前端开发的道路上，我还能看到双向数据绑定更多优点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/27/angularjs-data-bind/" data-id="cj9ax67rr0001vpaq83ofigzx" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-my-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -117,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/17/my-first-blog/" data-id="cj8x2j9n60001j2aqxpocw3w9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/17/my-first-blog/" data-id="cj9ax67ru0002vpaqy5zr7luy" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -164,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/17/hello-world/" data-id="cj8x2j9n00000j2aq3suplmjq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/17/hello-world/" data-id="cj9ax67rl0000vpaq1ocpqwiz" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -184,9 +241,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
     </div>
   </div>
 
@@ -194,9 +251,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+      <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
     </div>
   </div>
 
@@ -213,9 +270,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/10/27/angularjs-data-bind/">简述Angularjs的数据绑定</a>
+          </li>
         
           <li>
             <a href="/2017/10/17/my-first-blog/">搭建个人博客</a>
@@ -238,7 +299,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

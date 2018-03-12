@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,unit testing," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这两天完成了项目中的一个不是很大的功能实现,功能虽小,但是暴露出较多的问题.在这里做简单记录总结. 功能简述器具受检率统计是一个实体,有一个年份字段,器具每年可以受检也可以不检.由于新的一年,器具的基本信息都不会改变,但是器具要重新统计是否受检,所以受检总数变为0.由于大部分的字段都不用改变,所以需要一个clone方法,clone上一年份的所有信息,然后将年份和受检总数重新设置.">
+<meta name="keywords" content="java,unit testing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目心得(一)">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/project-experience/index.html">
+<meta property="og:site_name" content="喵先生 的进阶之路">
+<meta property="og:description" content="这两天完成了项目中的一个不是很大的功能实现,功能虽小,但是暴露出较多的问题.在这里做简单记录总结. 功能简述器具受检率统计是一个实体,有一个年份字段,器具每年可以受检也可以不检.由于新的一年,器具的基本信息都不会改变,但是器具要重新统计是否受检,所以受检总数变为0.由于大部分的字段都不用改变,所以需要一个clone方法,clone上一年份的所有信息,然后将年份和受检总数重新设置.">
+<meta property="og:updated_time" content="2018-03-12T10:22:25.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="项目心得(一)">
+<meta name="twitter:description" content="这两天完成了项目中的一个不是很大的功能实现,功能虽小,但是暴露出较多的问题.在这里做简单记录总结. 功能简述器具受检率统计是一个实体,有一个年份字段,器具每年可以受检也可以不检.由于新的一年,器具的基本信息都不会改变,但是器具要重新统计是否受检,所以受检总数变为0.由于大部分的字段都不用改变,所以需要一个clone方法,clone上一年份的所有信息,然后将年份和受检总数重新设置.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/11/project-experience/"/>
+
+
+
+
+
+  <title>项目心得(一) | 喵先生 的进阶之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">喵先生 的进阶之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">简单  快乐  喵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/11/project-experience/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Po Shichao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵先生 的进阶之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">项目心得(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-11T21:36:05+08:00">
+                2018-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这两天完成了项目中的一个不是很大的功能实现,功能虽小,但是暴露出较多的问题.在这里做简单记录总结.</p>
+<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2><p>器具受检率统计是一个实体,有一个年份字段,器具每年可以受检也可以不检.由于新的一年,器具的基本信息都不会改变,但是器具要重新统计是否受检,所以受检总数变为0.由于大部分的字段都不用改变,所以需要一个clone方法,clone上一年份的所有信息,然后将年份和受检总数重新设置.</p>
+<a id="more"></a>
+<h2 id="实现构想"><a href="#实现构想" class="headerlink" title="实现构想"></a>实现构想</h2><ol>
+<li><p>获取系统当前年份,进而求得上一年年份</p>
+</li>
+<li><p>根据年份获取上一年的所有记录</p>
+</li>
+<li><p>遍历所有记录,将年份重置为今年年份,受检总数重置为0,其他属性直接复制</p>
+</li>
+</ol>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="一-如何获取所有记录"><a href="#一-如何获取所有记录" class="headerlink" title="(一)如何获取所有记录?"></a>(一)如何获取所有记录?</h3><p>第一想法,for循环.但马上就被自己否掉了.数据少还可以,但是数据多了呢?显然不切实际,那么如何能一下子将所有的记录都直接取出来呢?</p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>在对应的repository上直接添加函数 <code>findAllByYear</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">List&lt;InstrumentCheckedRate&gt; <span class="title">findAllByYear</span><span class="params">(Short year)</span></span>;</div></pre></td></tr></table></figure>
+<p>这是一个Spring Data JPA提供给我们的查询策略,这里不做详细解释,参考<a href="https://docs.spring.io/spring-data/jpa/docs/2.0.5.RELEASE/reference/html/#jpa.query-methods.query-creation" target="_blank" rel="external">https://docs.spring.io/spring-data/jpa/docs/2.0.5.RELEASE/reference/html/#jpa.query-methods.query-creation</a></p>
+<h3 id="二-如何获取大量数据"><a href="#二-如何获取大量数据" class="headerlink" title="(二)如何获取大量数据"></a>(二)如何获取大量数据</h3><p>在获取大量数据时,当数据量达到十万级百万级,显然我们再一下子或去除所有的信息就显得行不通了.这么大量的数据量必然会造成数据库卡顿甚至崩溃.</p>
+<h4 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h4><p>分组获取.我们将对应的信息进行一个分组,将直接全部获取变为批量获取,这样就能减小数据库的压力.同样的,我们还是再repository上建立分组获取的方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Page&lt;InstrumentCheckedRate&gt; <span class="title">findAllByYear</span><span class="params">(Short year, Pageable pageRequest)</span></span>;</div></pre></td></tr></table></figure>
+<p><code>pageRequest</code> 是用来limit的参数,它会控制批量获取数据.参考<a href="https://docs.spring.io/spring-data/commons/docs/current/api/" target="_blank" rel="external">https://docs.spring.io/spring-data/commons/docs/current/api/</a></p>
+<h3 id="三-如何进行单元测试"><a href="#三-如何进行单元测试" class="headerlink" title="(三)如何进行单元测试?"></a>(三)如何进行单元测试?</h3><p>既然我们设计了要获取大量的数据,所以我们就要测试一下在较多的数据下的情况.所以我们要创建多组数据.然后在执行Clone方法后如何判断方法执行成功?</p>
+<h4 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a>解决办法</h4><p>首先,插入大量数据这点还没有一个较好的解决办法,只是用循环逐条插入,虽然效率较低,但是,我们此单元测试的主要功能并不是测试插入,所以这部分暂时搁置.</p>
+<p>然后说一下我们如何判断方法执行成功.执行玩这个方法后,由于是按已有对象的克隆,所以首先就是要断言上一年分的对象依然存在.然后断言新的对象是否成功持久化.最后再判断新的对象的属性是否都成功赋值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clonePreYearForCurrentYear</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    	...</div><div class="line">       logger.info(<span class="string">"调用service层方法克隆当前年份的的实体对象"</span>);</div><div class="line">       instrumentCheckedRateService.clonePreYearForCurrentYear();</div><div class="line">       logger.info(<span class="string">"从数据库中获取刚刚持久化的当前年份的对象"</span>);</div><div class="line">       List&lt;InstrumentCheckedRate&gt; newInstrumentCheckedRates = instrumentCheckedRateRepository.findAllByYear((<span class="keyword">short</span>)currentYear);</div><div class="line">       logger.info(<span class="string">"断言上一年份的记录依然存在"</span>);</div><div class="line">       assertThat(instrumentCheckedRateRepository.countByYear((<span class="keyword">short</span>)preYear)).isEqualTo(<span class="number">10000L</span>);</div><div class="line">       logger.info(<span class="string">"断言新的记录已经 clone"</span>);</div><div class="line">       assertThat(instrumentCheckedRateRepository.countByYear((<span class="keyword">short</span>)currentYear)).isEqualTo(<span class="number">10000L</span>);</div><div class="line">       logger.info(<span class="string">"断言当前年份的对象的属性与上一年份的属性相同"</span>);</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; newInstrumentCheckedRates.size(); i++) &#123;</div><div class="line">           assertThat(newInstrumentCheckedRates.get(i).getYear()).isEqualTo((<span class="keyword">short</span>) currentYear);</div><div class="line">           assertThat(newInstrumentCheckedRates.get(i).getCheckedTotalCount()).isEqualTo(<span class="number">0</span>);</div><div class="line">           assertThat(newInstrumentCheckedRates.get(i).getInstrumentType()).isEqualTo(instrumentType);</div><div class="line">           assertThat(newInstrumentCheckedRates.get(i).getInstrumentUserDepartment()).isEqualTo(department);</div><div class="line">           ...</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h2><p>方法功能虽然实现了,但是再代码结构不清,比较混乱重复代码较多.所以这就急需重构代码.</p>
+<h3 id="公共函数提炼"><a href="#公共函数提炼" class="headerlink" title="公共函数提炼"></a>公共函数提炼</h3><p>克隆部分是最多但是都是重复的代码,而且以后很有可能还会使用这个方法,所以选择将其提炼成一个公共函数,克隆自身.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> InstrumentCheckedRate <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        InstrumentCheckedRate instrumentCheckedRate = <span class="keyword">new</span> InstrumentCheckedRate();</div><div class="line">        <span class="comment">// clone 所有属性</span></div><div class="line">        instrumentCheckedRate.setYear(<span class="keyword">this</span>.getYear());</div><div class="line">        instrumentCheckedRate.setTotalCount(<span class="keyword">this</span>.getTotalCount());</div><div class="line">        instrumentCheckedRate.setCheckedTotalCount(<span class="keyword">this</span>.getCheckedTotalCount());</div><div class="line">        instrumentCheckedRate.setInstrumentType(<span class="keyword">this</span>.getInstrumentType());</div><div class="line">        instrumentCheckedRate.setInstrumntUserDepartment(<span class="keyword">this</span>.getInstrumentUserDepartment());</div><div class="line">        instrumentCheckedRate.setProvince(<span class="keyword">this</span>.getProvince());</div><div class="line">        instrumentCheckedRate.setCity(<span class="keyword">this</span>.getCity());</div><div class="line">        instrumentCheckedRate.setProvince(<span class="keyword">this</span>.getProvince());</div><div class="line">        <span class="keyword">return</span> instrumentCheckedRate;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="函数逻辑重构"><a href="#函数逻辑重构" class="headerlink" title="函数逻辑重构"></a>函数逻辑重构</h3><p>开始定义多个变量用来实现控制分组获取数据,但是变量一多,就显得结构不够清晰,而且也不利于代码的修改,不方便阅读.修改逻辑后,只选择使用一个变量,用来判断是否为最后一页,直到最后一页循环停止.最后,在保存的时候,不要每复制完一个对象都保存一次,应该是在复制完一组之后,将整组批量存入.这样会减少访问数据库的次数.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(!isLastPage) &#123;</div><div class="line">            <span class="comment">// 用来限定每组1000条数据</span></div><div class="line">            PageRequest pageRequest = <span class="keyword">new</span> PageRequest(page, <span class="keyword">this</span>.onceDataNum);</div><div class="line">            <span class="comment">// 获取一组对象并加进数组中</span></div><div class="line">            Page&lt;InstrumentCheckedRate&gt; preInstrumentCheckedRate = instrumentCheckedRateRepository.findAllByYear((<span class="keyword">short</span>)preYear, pageRequest);</div><div class="line"></div><div class="line">            <span class="comment">// 当前页为最后一页</span></div><div class="line">            <span class="keyword">if</span> (preInstrumentCheckedRate.isLast()) &#123;</div><div class="line">                isLastPage = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            page++;         <span class="comment">// 组号自增,获取下一组</span></div><div class="line"></div><div class="line">            <span class="comment">// 创建一个数组,存放当前年份</span></div><div class="line">            List&lt;InstrumentCheckedRate&gt; instrumentCheckedRateList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">            <span class="comment">// clone</span></div><div class="line">            <span class="keyword">for</span> (InstrumentCheckedRate instrumentCheckedRate : preInstrumentCheckedRate) &#123;</div><div class="line">                <span class="comment">// 新建一个对象</span></div><div class="line">                InstrumentCheckedRate newInstrumentCheckedRate = instrumentCheckedRate.clone();</div><div class="line">                <span class="comment">// 设置年份为当前年份</span></div><div class="line">                newInstrumentCheckedRate.setYear((<span class="keyword">short</span>) currentYear);</div><div class="line">                <span class="comment">// 设置受检总数为0</span></div><div class="line">                newInstrumentCheckedRate.setCheckedTotalCount(<span class="number">0</span>);</div><div class="line">                instrumentCheckedRateList.add(newInstrumentCheckedRate);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// 当前年份数组持久化</span></div><div class="line">            instrumentCheckedRateRepository.save(instrumentCheckedRateList);</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>每一个小的功能实现都不是简单的思考就可以实现的.勤思,会为你后面的大功能做思维的铺垫;规范,会让你的代码结构清晰.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifu.jpg" alt="Po Shichao Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/unit-testing/" rel="tag"># unit testing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/07/Software-Testing-Experience/" rel="next" title="软件测试心得">
+                <i class="fa fa-chevron-left"></i> 软件测试心得
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Po Shichao" />
+            
+              <p class="site-author-name" itemprop="name">Po Shichao</p>
+              <p class="site-description motion-element" itemprop="description">简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/poshichao" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.com/" title="梦云智团队首页" target="_blank">梦云智团队首页</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.cn/" title="梦云智团队博客" target="_blank">梦云智团队博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现构想"><span class="nav-number">2.</span> <span class="nav-text">实现构想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-如何获取所有记录"><span class="nav-number">3.1.</span> <span class="nav-text">(一)如何获取所有记录?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">3.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-如何获取大量数据"><span class="nav-number">3.2.</span> <span class="nav-text">(二)如何获取大量数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-如何进行单元测试"><span class="nav-number">3.3.</span> <span class="nav-text">(三)如何进行单元测试?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码重构"><span class="nav-number">4.</span> <span class="nav-text">代码重构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公共函数提炼"><span class="nav-number">4.1.</span> <span class="nav-text">公共函数提炼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数逻辑重构"><span class="nav-number">4.2.</span> <span class="nav-text">函数逻辑重构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Po Shichao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

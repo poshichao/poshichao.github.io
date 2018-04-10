@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="angularjs," />
+  <meta name="keywords" content="angularjs,java," />
 
 
 
@@ -123,19 +123,17 @@
 
 
 
-<meta name="description" content="前两天做了项目中前台的几个功能以及对接的部分,对于 angularjs 这门语言有了更好的理解.在这里做下总结. 功能简述这次实现的功能有三个,数据的新增,编辑以及对所有数据以列表形式显示.其中新增和编辑两部分都是直接表单提交,所用的前台界面完全一样.">
-<meta name="keywords" content="angularjs">
+<meta name="description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
+<meta name="keywords" content="angularjs,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目心得(三)">
-<meta property="og:url" content="http://yoursite.com/2018/03/19/project-experience-3/index.html">
+<meta property="og:title" content="项目心得(四)">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/project-experience-4/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="前两天做了项目中前台的几个功能以及对接的部分,对于 angularjs 这门语言有了更好的理解.在这里做下总结. 功能简述这次实现的功能有三个,数据的新增,编辑以及对所有数据以列表形式显示.其中新增和编辑两部分都是直接表单提交,所用的前台界面完全一样.">
-<meta property="og:image" content="http://yoursite.com/image/2018-03-19.1.png">
-<meta property="og:updated_time" content="2018-03-19T08:33:17.322Z">
+<meta property="og:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
+<meta property="og:updated_time" content="2018-04-10T13:41:44.372Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目心得(三)">
-<meta name="twitter:description" content="前两天做了项目中前台的几个功能以及对接的部分,对于 angularjs 这门语言有了更好的理解.在这里做下总结. 功能简述这次实现的功能有三个,数据的新增,编辑以及对所有数据以列表形式显示.其中新增和编辑两部分都是直接表单提交,所用的前台界面完全一样.">
-<meta name="twitter:image" content="http://yoursite.com/image/2018-03-19.1.png">
+<meta name="twitter:title" content="项目心得(四)">
+<meta name="twitter:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
 
 
 
@@ -165,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/19/project-experience-3/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/10/project-experience-4/"/>
 
 
 
 
 
-  <title>项目心得(三) | 喵先生 的进阶之路</title>
+  <title>项目心得(四) | 喵先生 的进阶之路</title>
   
 
 
@@ -322,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/project-experience-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/project-experience-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -339,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">项目心得(三)</h1>
+          <h1 class="post-title" itemprop="name headline">项目心得(四)</h1>
         
 
         <div class="post-meta">
@@ -351,8 +349,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-19T10:41:53+08:00">
-                2018-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T21:31:57+08:00">
+                2018-04-10
               </time>
             
 
@@ -389,27 +387,8 @@
       
 
       
-        <p>前两天做了项目中前台的几个功能以及对接的部分,对于 <code>angularjs</code> 这门语言有了更好的理解.在这里做下总结.</p>
-<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2><p>这次实现的功能有三个,数据的新增,编辑以及对所有数据以列表形式显示.其中新增和编辑两部分都是直接表单提交,所用的前台界面完全一样.</p>
-<a id="more"></a>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>由于前台的有一部分代码已经有了,所以只需在这个基础上做些修改.修改中出现了许多问题.解决这些问题的同时也加深了自己对 <code>angularjs</code> 的理解.</p>
-<h3 id="变量污染问题"><a href="#变量污染问题" class="headerlink" title="变量污染问题"></a>变量污染问题</h3><p>先看一段代码:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.load = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> standardDevice = &#123;<span class="attr">id</span>: $stateParams.standardDeviceId&#125;;</div><div class="line">    StandardDeviceCheckDetailService.pageAllByStandardDevice(self.generateQueryParams(), standardDevice, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    $scope.data = data;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>这段代码的功能是加载页面信息,通过<code>standardDevice</code>来查询对应的信息,然后回调函数会返回一个<code>data</code>,也就是我们要显示的所有信息,它应该是一个json对象.</p>
-<p>可以看到,我们这里用<code>$scope.data = data</code>来将返回的数据赋值给当前的域$scope.但是这样的写法存在一些问题.会出现如下的报错.</p>
-<p><img src="/image/2018-03-19.1.png" alt=""></p>
-<p>这个报错的原因就是产生了变量污染,我们在子scope中变量名用 <code>data</code> 来表示,在父scope中变量名也用 <code>data</code>,那么我们在获取信息的时候就不知道当前要获取的data是子scope中的还是父scope中的,这就产生了歧义.</p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>我们知道了问题的原因,这个问题就好解决了.既然污染产生的原因是变量名称相同,那我们在每个scope定义的时候都用不同的变量名来定义就可以了.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> self.load = self.reload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> standardDevice = &#123;<span class="attr">id</span>: $stateParams.standardDeviceId&#125;;</div><div class="line">    StandardDeviceCheckDetailService.pageAllByStandardDevice(self.generateQueryParams(), standardDevice, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    $scope.checkDetailList = data;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="路径绑定id问题"><a href="#路径绑定id问题" class="headerlink" title="路径绑定id问题"></a>路径绑定id问题</h3><p>还是先看一段代码:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> id = $stateParams.id;</div><div class="line"><span class="keyword">var</span> url = <span class="string">'/StandardDeviceCheckDetail/'</span> + id;</div><div class="line">$http.get(url)</div><div class="line">    .then(<span class="function"><span class="keyword">function</span> <span class="title">success</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">    	...</div><div class="line">    &#125;, <span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">    	...</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
-<p>这段代码是用来发起http请求的,以连接后台.通过id获取对应的对象.可以看到,我在开始定义了一个变量<code>id</code>,而这个id是通过路由参数获取的,然后又将该id拼接到路由中去.</p>
-<p>这样的定义变量方式会产生一个隐患.试想一下,我们的页面逐层深入,路由中就会拼接许多个都叫<code>id</code>的id,那么,如果我想获取一个id,我该怎么获取呢?</p>
-<p>所以,变量显然是不能这么定义的.</p>
-<h4 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> checkDetailId = $stateParams.id;</div><div class="line"><span class="keyword">var</span> url = <span class="string">'/StandardDeviceCheckDetail/'</span> + checkDetailId;</div><div class="line">$http.get(url)</div><div class="line">    .then(<span class="function"><span class="keyword">function</span> <span class="title">success</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">    	...</div><div class="line">    &#125;, <span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">        ...</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
-<p>根据不同的页面为不同的id定义不同的名称.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在变量定义的格式上,我们不能一味地只追求代码的复用,这样的复用只会给我们带来更大的工作量.<strong> 在适当的位置做用适当的变量名称,做好区分 </strong>, 不仅能让我们快速直接的找到我们想要的信息,在以后的维护上也会减少很多查错的时间.</p>
-
+        <p>很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结.</p>
+<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2>
       
     </div>
     
@@ -452,6 +431,8 @@
           
             <a href="/tags/angularjs/" rel="tag"># angularjs</a>
           
+            <a href="/tags/java/" rel="tag"># java</a>
+          
         </div>
       
 
@@ -463,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/13/project-experience-2/" rel="next" title="项目心得(二)">
-                <i class="fa fa-chevron-left"></i> 项目心得(二)
+              <a href="/2018/03/19/project-experience-3/" rel="next" title="项目心得(三)">
+                <i class="fa fa-chevron-left"></i> 项目心得(三)
               </a>
             
           </div>
@@ -473,8 +454,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/10/project-experience-4/" rel="prev" title="项目心得(四)">
-                项目心得(四) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/10/java-asynchronous/" rel="prev" title="java中的异步机制">
+                java中的异步机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -630,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量污染问题"><span class="nav-number">2.1.</span> <span class="nav-text">变量污染问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">2.1.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路径绑定id问题"><span class="nav-number">2.2.</span> <span class="nav-text">路径绑定id问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li></ol></div>
             
 
           </div>

@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制.">
+<meta name="description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中的异步机制">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/java-asynchronous/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制.">
-<meta property="og:updated_time" content="2018-04-10T13:45:01.015Z">
+<meta property="og:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
+<meta property="og:updated_time" content="2018-04-19T06:21:24.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中的异步机制">
-<meta name="twitter:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制.">
+<meta name="twitter:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
 
 
 
@@ -229,7 +229,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -249,49 +249,15 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            Suche
-          </a>
-        </li>
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -347,7 +313,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T21:33:05+08:00">
                 2018-04-10
@@ -388,6 +354,33 @@
 
       
         <p>在最近的项目中,前台出现了一次500的异常,错误信息是 <code>read time out</code> .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制.</p>
+<h2 id="为什么要使用异步"><a href="#为什么要使用异步" class="headerlink" title="为什么要使用异步"></a>为什么要使用异步</h2><p>简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使用一个线程,将运行时间长的函数放到这个单独的线程中去执行.</p>
+<a id="more"></a>
+<h2 id="java-异步编程"><a href="#java-异步编程" class="headerlink" title="java 异步编程"></a>java 异步编程</h2><p>下面介绍两种 <code>java</code> 中的异步编程方式.</p>
+<h3 id="Future方式的异步编程"><a href="#Future方式的异步编程" class="headerlink" title="Future方式的异步编程"></a><code>Future</code>方式的异步编程</h3><p><code>Future</code> 表示未来的某个异步计算的结果, 当我们向线程池提交任务的时候,就会获得这个对象. 然后可以使用 <code>get</code> 方法来获取计算完成的结果,并且只有在计算完成时才能使用.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ArchiveSearcher</span> </span>&#123; <span class="function">String <span class="title">search</span><span class="params">(String target)</span></span>; &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</div><div class="line">    ExecutorService executor = ...        <span class="comment">// 执行者,用来执行函数</span></div><div class="line">    ArchiveSearcher searcher = ...</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showSearch</span><span class="params">(<span class="keyword">final</span> String target)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Future&lt;String&gt; future = executor.submit(<span class="keyword">new</span> Callable&lt;String&gt;() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> searcher.search(target);</div><div class="line">        &#125;&#125;);</div><div class="line">        displayOtherThings();           <span class="comment">// 在这里可以做一些其他的事情</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            displayText(future.get());  <span class="comment">// 使用 future, 获取结果</span></div><div class="line">        &#125; <span class="keyword">catch</span> (ExecutionException ex) &#123; </div><div class="line">            cleanup(); </div><div class="line">            <span class="keyword">return</span>; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到,在这段代码中,我们先定义了一个执行者,他会执行未来的某个函数.然后我们定义了一个Future对象,他的值就是上面的执行者 <code>executor</code> 执行了 <code>call</code> 函数后的返回值.这个call函数中就是我们要执行的运行时间很长的函数.在他之后,这个函数或交给另一个线程去执行,而我们也不用等待这个函数执行完,可以去做一些其他的事情.最后,使用 <code>Future</code> 对象中的get方法,获取函数执行后的返回值.</p>
+<blockquote>
+<p><strong> 注意: </strong> 这里有可能会抛出一个执行异常,所以我们需要在这里使用try catch来处理一下异常.</p>
+</blockquote>
+<h3 id="CompletableFuture方式的异步编程"><a href="#CompletableFuture方式的异步编程" class="headerlink" title="CompletableFuture方式的异步编程"></a><code>CompletableFuture</code>方式的异步编程</h3><p>首先肯定就有人会问,有了Future,那为什么还要选择CompletableFuture这种异步编程的方式呢?</p>
+<p>答案显而易见:<strong>Future存在缺陷</strong>.</p>
+<blockquote>
+<p>Future虽然实现了异步,但是他缺少通知机制,所以我们并不能知道函数什么时候执行结束.</p>
+<p>使用阻塞,在<code>future.get()</code>的地方等待函数返回结果,但是这样就又成了同步的方式了.</p>
+<p>使用<code>isDone</code>来进行轮询判断Future是否执行结束,但这样又会显得很多余,浪费很多的CPU.</p>
+</blockquote>
+<p>有问题必然就要解决,所以就有了我们的 <code>CompletableFuture</code> 的编程方式.</p>
+<p><code>CompletableFuture</code> 这种异步编程的方式是在java8才出现的新的异步编程方式.他解决了一些在Future上存在的问题.使得java完整的实现了非阻塞方式的异步编程.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">CompletableFuture&lt;Void&gt; future = CompletableFuture.runAsync(() -&gt; &#123;</div><div class="line">    System.out.println(<span class="string">"Hello"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    future.get();</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(<span class="string">"CompletableFuture"</span>);</div></pre></td></tr></table></figure>
+<p>这里我们可以看到,我们调用了<code>CompletableFuture</code>中的一个静态方法<code>runAsync()</code>来执行异步代码(这里会默认分配给他一个线程池), 他会返回一个没有返回值的<code>CompletableFuture</code>.</p>
+<p>当然, <code>CompletableFuture</code> 当中还有很多的静态方法,可以获取没有返回值的,同样也可以获取有返回值的.这里就不一一介绍了.在最后我会给出链接,读者可自行学习.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然我们有异步编程的方式去解决函数执行时间长的问题,但是却不要首先想到这个执行办法,首先还是要看我们的函数时候能够减少数据库的IO操作,然后再去想是否应该使用异步编程.</p>
+<p><strong> 官方参考: </strong></p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html" target="_blank" rel="external">https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html</a></p>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="external">https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html</a></p>
+</blockquote>
 
       
     </div>
@@ -502,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -523,7 +525,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">12</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -536,7 +538,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -587,6 +589,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用异步"><span class="nav-number">1.</span> <span class="nav-text">为什么要使用异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-异步编程"><span class="nav-number">2.</span> <span class="nav-text">java 异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Future方式的异步编程"><span class="nav-number">2.1.</span> <span class="nav-text">Future方式的异步编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletableFuture方式的异步编程"><span class="nav-number">2.2.</span> <span class="nav-text">CompletableFuture方式的异步编程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -610,7 +628,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -779,323 +797,6 @@
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'manual') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 

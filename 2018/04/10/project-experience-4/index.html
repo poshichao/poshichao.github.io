@@ -123,17 +123,21 @@
 
 
 
-<meta name="description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
+<meta name="description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
 <meta name="keywords" content="angularjs,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目心得(四)">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/project-experience-4/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
-<meta property="og:updated_time" content="2018-04-10T13:41:44.372Z">
+<meta property="og:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
+<meta property="og:image" content="http://yoursite.com/image/2018-04-13.1.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-04-13.2.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-04-13.3.png">
+<meta property="og:updated_time" content="2018-04-16T11:35:02.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目心得(四)">
-<meta name="twitter:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述">
+<meta name="twitter:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
+<meta name="twitter:image" content="http://yoursite.com/image/2018-04-13.1.png">
 
 
 
@@ -229,7 +233,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -249,49 +253,15 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            Suche
-          </a>
-        </li>
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -347,7 +317,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T21:31:57+08:00">
                 2018-04-10
@@ -388,7 +358,33 @@
 
       
         <p>很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结.</p>
-<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2>
+<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2><p>强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.</p>
+<a id="more"></a>
+<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><h3 id="1-数据写入"><a href="#1-数据写入" class="headerlink" title="1.数据写入"></a>1.数据写入</h3><p>这里的第一个难点是逻辑的复杂.由于器具检定能力统计设计到多个相关联的实体,然后还需要通过关联的实体计算得自己的字段值,所以写入过程较为复杂.</p>
+<p>数据写入的流程图如下:</p>
+<p><img src="/image/2018-04-13.1.png" alt=""></p>
+<p>首先获取所有的区域,然后按区域进行授权检定项目的初始化,将所有获取到的区域遍历一遍,获取每个区域上的授权检定项目,并按照器具类别进行分类.</p>
+<p>将所有的授权检定项目初始化完后,我们需要计算器具的检定能力,根据不同的区域,计算不同区域上的器具检定能力.</p>
+<p>第二个难点是数据量庞大.在我们的系统中,有上千条数据,以后还会有更多的数据.又经过上面的复杂处理,前台的后台访问的时候,就出现了500的报错.错误原因就是读取超时.这个问题我会在后面的博客中做详细的讲解.</p>
+<h3 id="2-数据读取"><a href="#2-数据读取" class="headerlink" title="2.数据读取"></a>2.数据读取</h3><p>这个部分的难点其实并没有数据写入的复杂,但是由于我自己对于项目的功能的理解出现了点偏差,加大了问题的难度.</p>
+<h4 id="器具的分类"><a href="#器具的分类" class="headerlink" title="器具的分类"></a>器具的分类</h4><p>首先的一个问题是这个器具检定能力的查询,他有几种查询方式,通过查询的参数不同,需要以不同的属性对其分类.比如:</p>
+<p><img src="/image/2018-04-13.2.png" alt=""></p>
+<p>这个问题我想到了两种解决办法.</p>
+<ul>
+<li><p>第一种是后台写一个方法,获取传入的参数,然后根据传入的参数判断这个这个查询应该以哪个参数进行分类.</p>
+</li>
+<li><p>第二种方法是前台通过点击查询条件判断传入的参数,然后调用不同的函数,每个函数对应不同的分组.</p>
+</li>
+</ul>
+<p>这两种解决方法我选择了后者,原因的后者的处理更加方便了,虽然写了多个方法,但是逻辑处理更加简单.</p>
+<h3 id="3-解决问题中遇到的问题"><a href="#3-解决问题中遇到的问题" class="headerlink" title="3.解决问题中遇到的问题"></a>3.解决问题中遇到的问题</h3><p>遇到的最大的问题是read time out,读取超时.这个问题是由于前台发起http请求访问后台,调用后台相应的方法.但这个方法长时间没有放回数据给前台,超过了前台等待的最大时间.</p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>我们程序运行慢,很大程度上的瓶颈是出现在数据库的IO上,所以,想要减小程序的运行时间,就可以减小访问数据库的次数.</p>
+<p>返回数据中有两个参数,一个是器具总数,一个是受检总数.</p>
+<p><img src="/image/2018-04-13.3.png" alt=""></p>
+<p>在获取器具总数的时候,调用了一个统计的方法,每次查询的每个分组都会调用一次这个方法,而这个方法每次执行都需要访问数据库,无疑为程序带来了很大的压力.所以解决的办法就是一次将所有的器具都获取出来,然后分组以后,每个分组都是一个 <code>List&lt;&gt;</code> ,器具总数也就是List的size.</p>
+<p>在获取受检总数的时候,需要判断器具是否具有检定能力,而这是有个变量来表示的,为true表示这个器具具有检定能力.开始获取的时候,也是每次都调用一个方法,然后方法中查找检定能力为true的器具,同样的,这回多次访问数据库.解决办法同上,将所有的器具都获取出来,然后在分组后直接判断这个器具的对应字段是否为true,如果是,受检总数加一.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个模块的部分处理的时间有点长了,也是出于对这个模块没有充分的理解,做了很多不必要的做功.但不得不说,在处理一个又一个的问题的时候,收获还是不小的.</p>
+
       
     </div>
     
@@ -510,10 +506,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -538,7 +534,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">12</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -551,7 +547,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -611,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#难点"><span class="nav-number">2.</span> <span class="nav-text">难点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据写入"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据写入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据读取"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#器具的分类"><span class="nav-number">2.2.1.</span> <span class="nav-text">器具的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-解决问题中遇到的问题"><span class="nav-number">2.3.</span> <span class="nav-text">3.解决问题中遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">2.3.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -641,7 +637,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -810,323 +806,6 @@
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'manual') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 

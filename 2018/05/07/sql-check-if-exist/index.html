@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -123,16 +123,17 @@
 
 
 
-<meta name="description" content="简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。">
+<meta name="description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql-check-if-exist">
+<meta property="og:title" content="SQL：判断数据表中字段是否存在">
 <meta property="og:url" content="http://yoursite.com/2018/05/07/sql-check-if-exist/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。">
-<meta property="og:updated_time" content="2018-05-07T12:24:39.990Z">
+<meta property="og:description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
+<meta property="og:updated_time" content="2018-05-09T02:01:14.857Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sql-check-if-exist">
-<meta name="twitter:description" content="简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。">
+<meta name="twitter:title" content="SQL：判断数据表中字段是否存在">
+<meta name="twitter:description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
 
 
 
@@ -168,7 +169,7 @@
 
 
 
-  <title>sql-check-if-exist | 喵先生 的进阶之路</title>
+  <title>SQL：判断数据表中字段是否存在 | 喵先生 的进阶之路</title>
   
 
 
@@ -302,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sql-check-if-exist</h1>
+          <h1 class="post-title" itemprop="name headline">SQL：判断数据表中字段是否存在</h1>
         
 
         <div class="post-meta">
@@ -352,7 +353,24 @@
       
 
       
-        
+        <p>最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。</p>
+<a id="more"></a>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>解决这个问题的时候，google了不少的办法，但是没有成功。使用if 条件判断，还是使用exist函数的时候都会报错。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if Not exists(<span class="keyword">select</span> * <span class="keyword">from</span> sysobjects <span class="keyword">where</span> <span class="keyword">id</span>=object_id(<span class="string">'tableName'</span>) <span class="keyword">and</span> <span class="keyword">name</span>=<span class="string">'columnName'</span> ) <span class="keyword">then</span></div><div class="line"><span class="keyword">begin</span> </div><div class="line">alert <span class="keyword">table</span> tableName <span class="keyword">add</span> columnName</div><div class="line"><span class="keyword">end</span>;</div></pre></td></tr></table></figure>
+<p>这个时候会报出字段不存在的错，在执行<code>select</code>这条命令的时候，不认识columnName，所以报错。</p>
+<p>中间还出过几个错，在这里就不一一列举了。</p>
+<h2 id="最终的解决办法"><a href="#最终的解决办法" class="headerlink" title="最终的解决办法"></a>最终的解决办法</h2><p>最后的解决办法是在一个mysql的官方讨论区里找到的。在这里先给出解法。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> @dbname = <span class="keyword">DATABASE</span> ( );</div><div class="line"></div><div class="line"><span class="keyword">SET</span> @tablename = <span class="string">"tableName"</span>;</div><div class="line"></div><div class="line"><span class="keyword">SET</span> @columnname = <span class="string">"columnName"</span>;</div><div class="line"></div><div class="line"><span class="keyword">SET</span> @preparedStatement = (</div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">IF</span></div><div class="line">(</div><div class="line">(</div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">COUNT</span>( * ) </div><div class="line"><span class="keyword">FROM</span></div><div class="line">	INFORMATION_SCHEMA.COLUMNS </div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	( table_name = @tablename ) </div><div class="line">	<span class="keyword">AND</span> ( table_schema = @dbname ) </div><div class="line">	<span class="keyword">AND</span> ( column_name = @columnname ) </div><div class="line">	) &gt; <span class="number">0</span>,</div><div class="line">	<span class="string">"SELECT 1"</span>,</div><div class="line">	<span class="keyword">CONCAT</span>( <span class="string">"ALTER TABLE "</span>, @tablename, <span class="string">" ADD "</span>, @columnname, <span class="string">" VARCHAR(31) not null;"</span> ) </div><div class="line">) </div><div class="line">);</div><div class="line"><span class="keyword">PREPARE</span> alterIfNotExists </div><div class="line"><span class="keyword">FROM</span></div><div class="line">	@preparedStatement;</div><div class="line"><span class="keyword">EXECUTE</span> alterIfNotExists;</div><div class="line"><span class="keyword">DEALLOCATE</span> <span class="keyword">PREPARE</span> alterIfNotExists;</div></pre></td></tr></table></figure>
+<p>下面我做下简单解释。</p>
+<blockquote>
+<p>1.首先，定义了三个变量，分别为数据库名，表名，字段名，这是后面会重复用到的，所以在这里进行定义。<br>2.然后定义了另一个变量，这个变量主要执行查找<code>select</code>，查找是否存在我们要添加的字段的相关记录。<br>3.最后是这个解法的最特别之处：定义一个预处理变量，这个变量就是处理上面我们的查找的那个变量，然后执行预处理。最后Deallocate一下，释放所使用的数据库资源</p>
+</blockquote>
+<h2 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a>预处理语句</h2><p>好了，问题解决了，但是肯定还是有疑惑的：什么是预处理语句呢？</p>
+<p><strong> MySQL官方将<code>prepare</code>、<code>execute</code>、<code>deallocate</code>统称为<code>PREPARE STATEMENT</code>。我们称之为【预处理语句】</strong></p>
+<p>预处理，顾名思义，预先处理。他会在sql执行之前进行语句解析，然后统一执行一次或多次。通过上面的例子我们可以看到，预处理其实非常简单。</p>
+<p>笔者对sql研究较少，理解有限，所以在这里给出预处理的<a href="https://dev.mysql.com/doc/refman/8.0/en/sql-syntax-prepared-statements.html" target="_blank" rel="external">官方参考</a>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次编写sql语句，感受到了sql的博大，从最开始比较水比较基础的sql语句，到后面使用预处理，语句质量提升了一大步，对sql又产生了兴趣。</p>
+
       
     </div>
     
@@ -390,6 +408,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
       
 
       
@@ -460,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -493,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
@@ -544,6 +577,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终的解决办法"><span class="nav-number">2.</span> <span class="nav-text">最终的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理语句"><span class="nav-number">3.</span> <span class="nav-text">预处理语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

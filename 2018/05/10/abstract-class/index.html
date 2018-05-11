@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：同归角色获取所有的菜单。">
+<meta name="description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目心得(五)——抽象类">
 <meta property="og:url" content="http://yoursite.com/2018/05/10/abstract-class/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：同归角色获取所有的菜单。">
+<meta property="og:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-10.1.png">
-<meta property="og:updated_time" content="2018-05-10T08:59:15.900Z">
+<meta property="og:updated_time" content="2018-05-11T14:17:12.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目心得(五)——抽象类">
-<meta name="twitter:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：同归角色获取所有的菜单。">
+<meta name="twitter:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
 <meta name="twitter:image" content="http://yoursite.com/image/2018-05-10.1.png">
 
 
@@ -356,14 +356,17 @@
 
       
         <p>在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：同归角色获取所有的菜单。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。</p>
 <a id="more"></a>
-<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><p>修改实体对应的关系这个比较简单，在进行查询操作的时候就出现了问题。我们都知道，在通过角色获取所有菜单的时候，必然要通过中间表来找到对应的菜单。这时候报错出现了：</p>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><p>修改实体对应的关系这个比较简单，但在进行查询操作的时候就出现了问题。我们都知道，在通过角色获取所有菜单的时候，必然要通过中间表来找到对应的菜单。这时候报错出现了：</p>
 <p><img src="/image/2018-05-10.1.png" alt=""></p>
 <p>可以看到，报错中说不能从元组中实例化<code>BaseWebAppMenu</code>这个类从。原因是什么呢?</p>
-<p>中间Google了好多办法，但是都不行。最终找到了问题的原因：BaseWebAppMenu这个父类是一个抽象类，不能进行实例化。</p>
+<p>中间Google了好多办法，但是都不行。最终找到了问题的原因：<strong>BaseWebAppMenu这个父类是一个抽象类，不能进行实例化。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Query</span>(value = <span class="string">"SELECT new BaseWebAppMenu(w.baseWebAppMenu.id) FROM UserRole u, WebAppMenuRole w where w.role.id = u.role.id and u.user.id=?1"</span>)</div><div class="line"><span class="function">List&lt;BaseWebAppMenu&gt; <span class="title">findAllByUserId</span><span class="params">(Long userId)</span></span>;</div></pre></td></tr></table></figure>
-<p>在repository中，我们需要通过角色获取所有的菜单，这时候我们使用了<code>@Query</code>这个注解，它在执行查询的时候会实例化基本菜单，但是基本菜单又不能实例化，所以就报出了上面的错误。</p>
+<blockquote>
+<p>这里简单看了一下什么是元组：一个容器对象，包含了多个对象，允许从容器中读取，不允许向里添加。</p>
+</blockquote>
+<p>在repository中，我们需要通过角色获取所有的菜单，这时候我们使用了<code>@Query</code>这个注解，它在执行查询的时候会返回一个元组，元组中的对象就是实例化的基本菜单，但是基本菜单又不能实例化，所以就报出了上面的错误。</p>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决的办法很简单，既然抽象类不能实例化，那么我们就不让他是抽象类不就行了。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这里我们虽然是成功的解决了问题，但是我们又不得不思考后面的问题：我们的历史数据怎么实现保存。所以，还是要权衡一下能不能使用这个办法。</p>
 

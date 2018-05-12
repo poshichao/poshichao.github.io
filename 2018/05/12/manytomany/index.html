@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="thinkphp," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -123,17 +123,17 @@
 
 
 
-<meta name="description" content="ThinkPHP获取上一页面的url最近项目有一个需求，需要从一个页面跳转到编辑界面，然后保存后返回原来的界面。由于正常的保存成功只能返回到编辑对应的模块总览界面，所以，要实现跳转回上一界面就必须获取到上一界面的url。">
-<meta name="keywords" content="thinkphp">
+<meta name="description" content="在项目中，实体关系有一种是多对多关系。在最近的项目中，我学习了两种维护多对多关系的方式，在这里与大家分享一下。 场景描述两个实体，角色和菜单，关系多对多。使用：Jpa的@ManyToMany注解。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="获取上一界面url并实现夸模块跳转">
-<meta property="og:url" content="http://yoursite.com/2017/11/16/get-pre-url/index.html">
+<meta property="og:title" content="实现多对多的两种方式">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/manytomany/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="ThinkPHP获取上一页面的url最近项目有一个需求，需要从一个页面跳转到编辑界面，然后保存后返回原来的界面。由于正常的保存成功只能返回到编辑对应的模块总览界面，所以，要实现跳转回上一界面就必须获取到上一界面的url。">
-<meta property="og:updated_time" content="2017-11-28T14:31:45.614Z">
+<meta property="og:description" content="在项目中，实体关系有一种是多对多关系。在最近的项目中，我学习了两种维护多对多关系的方式，在这里与大家分享一下。 场景描述两个实体，角色和菜单，关系多对多。使用：Jpa的@ManyToMany注解。">
+<meta property="og:updated_time" content="2018-05-12T06:00:10.347Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="获取上一界面url并实现夸模块跳转">
-<meta name="twitter:description" content="ThinkPHP获取上一页面的url最近项目有一个需求，需要从一个页面跳转到编辑界面，然后保存后返回原来的界面。由于正常的保存成功只能返回到编辑对应的模块总览界面，所以，要实现跳转回上一界面就必须获取到上一界面的url。">
+<meta name="twitter:title" content="实现多对多的两种方式">
+<meta name="twitter:description" content="在项目中，实体关系有一种是多对多关系。在最近的项目中，我学习了两种维护多对多关系的方式，在这里与大家分享一下。 场景描述两个实体，角色和菜单，关系多对多。使用：Jpa的@ManyToMany注解。">
 
 
 
@@ -163,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/16/get-pre-url/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/manytomany/"/>
 
 
 
 
 
-  <title>获取上一界面url并实现夸模块跳转 | 喵先生 的进阶之路</title>
+  <title>实现多对多的两种方式 | 喵先生 的进阶之路</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/get-pre-url/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/manytomany/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">获取上一界面url并实现夸模块跳转</h1>
+          <h1 class="post-title" itemprop="name headline">实现多对多的两种方式</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-16T22:12:17+08:00">
-                2017-11-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T13:01:15+08:00">
+                2018-05-12
               </time>
             
 
@@ -353,20 +353,26 @@
       
 
       
-        <h1 id="ThinkPHP获取上一页面的url"><a href="#ThinkPHP获取上一页面的url" class="headerlink" title="ThinkPHP获取上一页面的url"></a>ThinkPHP获取上一页面的url</h1><p>最近项目有一个需求，需要从一个页面跳转到编辑界面，然后保存后返回原来的界面。由于正常的保存成功只能返回到编辑对应的模块总览界面，所以，要实现跳转回上一界面就必须获取到上一界面的url。</p>
+        <p>在项目中，实体关系有一种是多对多关系。在最近的项目中，我学习了两种维护多对多关系的方式，在这里与大家分享一下。</p>
+<h2 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h2><p>两个实体，角色和菜单，关系多对多。使用：Jpa的<code>@ManyToMany</code>注解。</p>
 <a id="more"></a>
-<h2 id="使用ThinkPHP内置对象"><a href="#使用ThinkPHP内置对象" class="headerlink" title="使用ThinkPHP内置对象"></a>使用ThinkPHP内置对象</h2><p>受到ThinkPHP内置方法success默认跳转的启发，这里我选择用 <code>$_SERVER[&#39;HTTP_REFERER&#39;]</code> 来获取上一界面的url。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$pre_url</span> = <span class="variable">$_SERVER</span>[<span class="string">'HTTP_REFERER'</span>];</div></pre></td></tr></table></figure>
-<h2 id="获取上一界面url"><a href="#获取上一界面url" class="headerlink" title="获取上一界面url"></a>获取上一界面url</h2><p>编辑的大概步骤是：点击编辑按钮，跳转到编辑界面，点击保存，触发 <code>update</code> 函数，跳转回上一界面。</p>
-<p><strong>C层 edit</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 从v层传来数据</div><div class="line"><span class="variable">$param</span> = Request::instance();</div><div class="line">// 获取上一界面url</div><div class="line"><span class="variable">$pre_url</span> = <span class="variable">$_SERVER</span>[<span class="string">'HTTP_REFERER'</span>];</div><div class="line">...</div><div class="line">// 将文章信息返回到v层</div><div class="line"><span class="variable">$this</span>-&gt;assign(<span class="string">'contractor'</span>, Contractor);</div><div class="line"><span class="variable">$this</span>-&gt;assign(<span class="string">'pre_url'</span>, <span class="variable">$pre_url</span>);</div><div class="line">// 返回编辑界面</div><div class="line"><span class="built_in">return</span> <span class="variable">$this</span>-&gt;fetch();</div></pre></td></tr></table></figure>
-<h2 id="url的传递"><a href="#url的传递" class="headerlink" title="url的传递"></a>url的传递</h2><p>由于update前还有一步edit，所以需要把上一界面的url传到v层，再从v层传递回来，由update方法接收一下。</p>
-<p><strong>C层 update</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 从v层传来数据</div><div class="line"><span class="variable">$param</span> = Request::instance();</div><div class="line">...</div><div class="line">// 接收v层传来的url</div><div class="line"><span class="variable">$pre_url</span> = <span class="variable">$param</span>-&gt;post(<span class="string">'pre_url'</span>);</div><div class="line">...</div><div class="line">// 编辑成功跳转回上一界面</div><div class="line"><span class="keyword">if</span> (<span class="variable">$Contractor</span>-&gt;save()) &#123;</div><div class="line">	<span class="built_in">return</span> <span class="variable">$this</span>-&gt;succsee(<span class="string">'编辑成功!'</span>, <span class="variable">$pre_url</span>);</div><div class="line">// 编辑失败</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="built_in">return</span> <span class="variable">$this</span>-&gt;error(<span class="string">'编辑失败!'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>注意：</strong>保存成功跳转时，不能使用 <code>url()</code> 助手函数来辅助生成url，因为我们这里获取到的 <code>$pre_url</code> 就是完整的url。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>C层 <code>Request::instance()</code>后，然后打印出它获取到的信息，会发现我们使用的对象就在里面。善于使用断点，会让你的编程省很多时间。</p>
-<hr>
-<p>官方参考资料：<a href="https://www.kancloud.cn/manual/thinkphp5/118051" target="_blank" rel="external">https://www.kancloud.cn/manual/thinkphp5/118051</a></p>
+<h2 id="一：简单实现"><a href="#一：简单实现" class="headerlink" title="一：简单实现"></a>一：简单实现</h2><p>第一种的实现方法就是在字段上简单使用多对多注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="meta">@ManyToMany</span></div><div class="line">    <span class="keyword">private</span> Set&lt;WebAppMenu&gt; webAppMenus = <span class="keyword">new</span> HashSet&lt;WebAppMenu&gt;();</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppMenu</span> <span class="keyword">extends</span> <span class="title">BaseWebAppMenu</span> </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="meta">@ManyToMany</span></div><div class="line">    <span class="keyword">private</span> Set&lt;Role&gt; roles = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是在使用这种方法的时候，还需要使用@ManyToMany注解的一个属性<code>mappedBy</code>，来声明维护中间表的一方。如果在这个时候不使用这个属性，就会出现生成两张中间表的现象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppMenu</span> </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="meta">@ManyToMany</span>(mappedBy = <span class="string">"webAppMenus"</span>)</div><div class="line">    <span class="keyword">private</span> Set&lt;Role&gt; roles = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这次我们在role这个字段上的@ManyTomany注解上使用mappedBy，将维护权交给对方，也就是说roles不能维护双方的关系，关系由WebAppMenus来维护。这样就只会生成一张中间表。</p>
+<h2 id="二：中间表类"><a href="#二：中间表类" class="headerlink" title="二：中间表类"></a>二：中间表类</h2><p>这种方法我们会直接定义一个中间表实体，然后将多对多的双方都映射到这个表中，这样一来就不用关维护方到底是谁了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name = <span class="string">"web_app_menu_role"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppMenuRole</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">	...</div><div class="line">    <span class="meta">@ManyToOne</span></div><div class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"role_id"</span>, insertable = <span class="keyword">false</span>, updatable = <span class="keyword">false</span>)</div><div class="line">    <span class="keyword">protected</span> Role role;</div><div class="line"></div><div class="line">    <span class="meta">@ManyToOne</span></div><div class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"web_app_menu_id"</span>, insertable = <span class="keyword">false</span>, updatable = <span class="keyword">false</span>)</div><div class="line">    <span class="keyword">protected</span> WebAppMenu webAppMenu;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是我们定义的中间表类，在这里，中间表和另外的两个实体关系都是多对一的，然后在实体上声明一下表名（也就是我们的中间表）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Table</span>(name = <span class="string">"web_app_menu_role"</span>)</div></pre></td></tr></table></figure>
+<p>然后声明一下中间表中的字段名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JoinColumn</span>(name = <span class="string">"role_id"</span>, insertable = <span class="keyword">false</span>, updatable = <span class="keyword">false</span>)</div><div class="line"><span class="meta">@JoinColumn</span>(name = <span class="string">"web_app_menu_id"</span>, insertable = <span class="keyword">false</span>, updatable = <span class="keyword">false</span>)</div></pre></td></tr></table></figure>
+<p>在我们的两个实体中，实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppMenu</span> </span>&#123;</div><div class="line">	...</div><div class="line">    <span class="meta">@ManyToMany</span></div><div class="line">    <span class="meta">@JoinTable</span>(</div><div class="line">            name = <span class="string">"web_app_menu_role"</span>,</div><div class="line">            joinColumns = <span class="meta">@JoinColumn</span>(name = <span class="string">"web_app_menu_id"</span>),</div><div class="line">            inverseJoinColumns = <span class="meta">@JoinColumn</span>(name = <span class="string">"role_id"</span>)</div><div class="line">    )</div><div class="line">    <span class="keyword">private</span> Set&lt;Role&gt; roles = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="meta">@ManyToMany</span></div><div class="line">    <span class="meta">@JoinTable</span>(</div><div class="line">            name = <span class="string">"web_app_menu_role"</span>,</div><div class="line">            joinColumns = <span class="meta">@JoinColumn</span>(name = <span class="string">"role_id"</span>),</div><div class="line">            inverseJoinColumns = <span class="meta">@JoinColumn</span>(name = <span class="string">"web_app_menu_id"</span>)</div><div class="line">    )</div><div class="line">    <span class="keyword">private</span> Set&lt;WebAppMenu&gt; webAppMenus = <span class="keyword">new</span> HashSet&lt;WebAppMenu&gt;();</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关联的实体中依然使用@ManyToMany注解，然后再使用@JoinTable注解，声明将这两个字段映射到中间表里，并对应上面的字段名。</p>
+<p><strong> 友情参考：<a href="https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany" target="_blank" rel="external">https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany</a></strong></p>
 
       
     </div>
@@ -408,7 +414,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/thinkphp/" rel="tag"># thinkphp</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -421,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/14/permissionToMkdir/" rel="next" title="解决Ubuntu上的ThinkPHP项目权限不够">
-                <i class="fa fa-chevron-left"></i> 解决Ubuntu上的ThinkPHP项目权限不够
+              <a href="/2018/05/10/abstract-class/" rel="next" title="项目心得(五)——抽象类">
+                <i class="fa fa-chevron-left"></i> 项目心得(五)——抽象类
               </a>
             
           </div>
@@ -430,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/28/table-td-function/" rel="prev" title="表格中关于td的操作">
-                表格中关于td的操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -588,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPHP获取上一页面的url"><span class="nav-number">1.</span> <span class="nav-text">ThinkPHP获取上一页面的url</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ThinkPHP内置对象"><span class="nav-number">1.1.</span> <span class="nav-text">使用ThinkPHP内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取上一界面url"><span class="nav-number">1.2.</span> <span class="nav-text">获取上一界面url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url的传递"><span class="nav-number">1.3.</span> <span class="nav-text">url的传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景描述"><span class="nav-number">1.</span> <span class="nav-text">场景描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一：简单实现"><span class="nav-number">2.</span> <span class="nav-text">一：简单实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：中间表类"><span class="nav-number">3.</span> <span class="nav-text">二：中间表类</span></a></li></ol></div>
             
 
           </div>

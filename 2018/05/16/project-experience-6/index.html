@@ -123,19 +123,17 @@
 
 
 
-<meta name="description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
+<meta name="description" content="版本更新，这是我最近反复遇到的问题。今天又一次遇到了需要照顾版本的问题。在这里记录一下。 问题描述添加新的菜单，存在老版本，需要照顾老版本。">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目心得(五)——抽象类">
-<meta property="og:url" content="http://yoursite.com/2018/05/10/abstract-class/index.html">
+<meta property="og:title" content="项目心得(六)">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/project-experience-6/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-10.1.png">
-<meta property="og:updated_time" content="2018-05-11T14:17:12.722Z">
+<meta property="og:description" content="版本更新，这是我最近反复遇到的问题。今天又一次遇到了需要照顾版本的问题。在这里记录一下。 问题描述添加新的菜单，存在老版本，需要照顾老版本。">
+<meta property="og:updated_time" content="2018-05-16T14:01:43.891Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目心得(五)——抽象类">
-<meta name="twitter:description" content="在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。 问题描述两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。">
-<meta name="twitter:image" content="http://yoursite.com/image/2018-05-10.1.png">
+<meta name="twitter:title" content="项目心得(六)">
+<meta name="twitter:description" content="版本更新，这是我最近反复遇到的问题。今天又一次遇到了需要照顾版本的问题。在这里记录一下。 问题描述添加新的菜单，存在老版本，需要照顾老版本。">
 
 
 
@@ -165,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/10/abstract-class/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/project-experience-6/"/>
 
 
 
 
 
-  <title>项目心得(五)——抽象类 | 喵先生 的进阶之路</title>
+  <title>项目心得(六) | 喵先生 的进阶之路</title>
   
 
 
@@ -288,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/abstract-class/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/project-experience-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -305,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">项目心得(五)——抽象类</h1>
+          <h1 class="post-title" itemprop="name headline">项目心得(六)</h1>
         
 
         <div class="post-meta">
@@ -317,8 +315,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T16:21:36+08:00">
-                2018-05-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T20:33:40+08:00">
+                2018-05-16
               </time>
             
 
@@ -355,20 +353,26 @@
       
 
       
-        <p>在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。</p>
+        <p>版本更新，这是我最近反复遇到的问题。今天又一次遇到了需要照顾版本的问题。在这里记录一下。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>添加新的菜单，存在老版本，需要照顾老版本。</p>
 <a id="more"></a>
-<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><p>修改实体对应的关系这个比较简单，但在进行查询操作的时候就出现了问题。我们都知道，在通过角色获取所有菜单的时候，必然要通过中间表来找到对应的菜单。这时候报错出现了：</p>
-<p><img src="/image/2018-05-10.1.png" alt=""></p>
-<p>可以看到，报错中说不能从元组中实例化<code>BaseWebAppMenu</code>这个类从。原因是什么呢?</p>
-<p>中间Google了好多办法，但是都不行。最终找到了问题的原因：<strong>BaseWebAppMenu这个父类是一个抽象类，不能进行实例化。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Query</span>(value = <span class="string">"SELECT new BaseWebAppMenu(w.baseWebAppMenu.id) FROM UserRole u, WebAppMenuRole w where w.role.id = u.role.id and u.user.id=?1"</span>)</div><div class="line"><span class="function">List&lt;BaseWebAppMenu&gt; <span class="title">findAllByUserId</span><span class="params">(Long userId)</span></span>;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这里简单看了一下什么是元组：一个容器对象，包含了多个对象，允许从容器中读取，不允许向里添加。</p>
-</blockquote>
-<p>在repository中，我们需要通过角色获取所有的菜单，这时候我们使用了<code>@Query</code>这个注解，它在执行查询的时候会返回一个元组，元组中的对象就是实例化的基本菜单，但是基本菜单又不能实例化，所以就报出了上面的错误。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>解决的办法很简单，既然抽象类不能实例化，那么我们就不让他是抽象类不就行了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这里我们虽然是成功的解决了问题，但是我们又不得不思考后面的问题：我们的历史数据怎么实现保存。所以，还是要权衡一下能不能使用这个办法。</p>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="1-直接添加菜单"><a href="#1-直接添加菜单" class="headerlink" title="1.直接添加菜单"></a>1.直接添加菜单</h3><p>最开始没有考虑到版本的问题，所以直接添加了一个菜单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 人员资质</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addWebAppMenusPersonnel</span><span class="params">()</span> </span>&#123;</div><div class="line">	...</div><div class="line"> 	WebAppMenu personnelSuperviseFileMenu = <span class="keyword">new</span> WebAppMenu();</div><div class="line">    personnelSuperviseFileMenu.setRouteName(<span class="string">"personnelSuperviseFile"</span>);</div><div class="line">    personnelSuperviseFileMenu.setParentRouteWebAppMenu(personnelMenu);</div><div class="line">    personnelSuperviseFileMenu.setParentWebAppMenu(personnelMenu);</div><div class="line">    personnelSuperviseFileMenu.setName(<span class="string">"监督抽查人员档案"</span>);</div><div class="line">    personnelSuperviseFileMenu.setWeight(<span class="number">300</span>);</div><div class="line">    personnelSuperviseFileMenu.setDescription(<span class="string">"人员资质管理监督抽查人员档案"</span>);</div><div class="line">    webAppMenus.add(personnelSuperviseFileMenu);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是，很明显这种方法有问题。</p>
+<h3 id="2-使用版本号进行控制"><a href="#2-使用版本号进行控制" class="headerlink" title="2.使用版本号进行控制"></a>2.使用版本号进行控制</h3><p>参考了一下以前的解决办法，生成一个随机的版本号，然后在执行初始化的时候判断一下有没有这个版本，如果没有，将版本号存进数据库，然后添加新的菜单；如果有，直接跳过。</p>
+<p>上面的代码没有变，在开始的时候添加一个版本判断：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String batch3 = <span class="string">"M0xOM80H0UWKVvE5GpVUiAg1b1cnAw5j"</span>;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">null</span> == migrationService.findByBatch(batch3)) &#123;</div><div class="line">	isAdd = <span class="keyword">true</span>;   <span class="comment">// 有新数据需要添加</span></div><div class="line"></div><div class="line">    logger.info(<span class="string">"维护版本信息"</span>);</div><div class="line">    migrationService.saveByBatch(batch3);</div><div class="line"></div><div class="line">    logger.info(<span class="string">"人员资质功能新增"</span>);</div><div class="line">    <span class="keyword">this</span>.addWebAppMenusPersonnel();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样会出现问题，在进行测试的时候，本应该出现一百多条的数据，只出现了几十条。原因是什么呢？</p>
+<p>因为我们在这里使用的还是<code>addWebAppMenusPersonnel()</code>这个方法，但是这个方法中的菜单我们已经在前面统一添加的时候添加过了一次，现在再添加一次，那么就会产生重复。初始化执行到这里发现有问题，就停止执行了，所以测试就会出现问题。</p>
+<h3 id="3-最终解决"><a href="#3-最终解决" class="headerlink" title="3.最终解决"></a>3.最终解决</h3><p>既然不能重复添加，那我们就要将新添加的菜单放在另一个函数中来单独添加。</p>
+<p>首先将定义一个全局变量：<code>personnelMenu</code>。这是由于这是个父类的菜单，他会在两个函数中被调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> WebAppMenu personnelMenu;</div></pre></td></tr></table></figure>
+<p>然后定义一个函数，用来单独添加新的菜单，同时要删除原来人员资质中的相应菜单部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 人员资质功能新增</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addPersonnelFunction</span><span class="params">()</span> </span>&#123;</div><div class="line">    logger.info(<span class="string">"为原有人员资质管理添加监督抽查人员档案"</span>);</div><div class="line">    WebAppMenu personnelSuperviseFileMenu = <span class="keyword">new</span> WebAppMenu();</div><div class="line">    personnelSuperviseFileMenu.setRouteName(<span class="string">"personnelSuperviseFile"</span>);</div><div class="line">    personnelSuperviseFileMenu.setParentRouteWebAppMenu(personnelMenu);</div><div class="line">    personnelSuperviseFileMenu.setParentWebAppMenu(personnelMenu);</div><div class="line">    personnelSuperviseFileMenu.setName(<span class="string">"监督抽查人员档案"</span>);</div><div class="line">    personnelSuperviseFileMenu.setWeight(<span class="number">300</span>);</div><div class="line">    personnelSuperviseFileMenu.setDescription(<span class="string">"人员资质管理监督抽查人员档案(适用于管理部门)"</span>);</div><div class="line">    webAppMenus.add(personnelSuperviseFileMenu);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后调用新建的函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String batch3 = <span class="string">"M0xOM80H0UWKVvE5GpVUiAg1b1cnAw5j"</span>;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">null</span> == migrationService.findByBatch(batch3)) &#123;</div><div class="line">    isAdd = <span class="keyword">true</span>;   <span class="comment">// 有新数据需要添加</span></div><div class="line"></div><div class="line">    logger.info(<span class="string">"维护版本信息"</span>);</div><div class="line">    migrationService.saveByBatch(batch3);</div><div class="line"></div><div class="line">    logger.info(<span class="string">"人员资质功能新增"</span>);</div><div class="line">    <span class="keyword">this</span>.addPersonnelFunction();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样问题就解决了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>随着系统的完善，我们肯定会对系统升级多次，对数据的维护就显得至关重要。很多时候我们不能手动取操作数据表来维护数据，所以维护数据的代码就少不了了。这就是我们要实现的自动维护：程序一启动，完全不用考虑数据的问题。这才是我们想要的效果。</p>
 
       
     </div>
@@ -423,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/07/sql-check-if-exist/" rel="next" title="SQL：判断数据表中字段是否存在">
-                <i class="fa fa-chevron-left"></i> SQL：判断数据表中字段是否存在
+              <a href="/2018/05/12/manytomany/" rel="next" title="实现多对多的两种方式">
+                <i class="fa fa-chevron-left"></i> 实现多对多的两种方式
               </a>
             
           </div>
@@ -432,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/12/manytomany/" rel="prev" title="实现多对多的两种方式">
-                实现多对多的两种方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -590,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-直接添加菜单"><span class="nav-number">2.1.</span> <span class="nav-text">1.直接添加菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用版本号进行控制"><span class="nav-number">2.2.</span> <span class="nav-text">2.使用版本号进行控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-最终解决"><span class="nav-number">2.3.</span> <span class="nav-text">3.最终解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

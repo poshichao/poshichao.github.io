@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="angularjs,java," />
+  <meta name="keywords" content="angularjs," />
 
 
 
@@ -123,21 +123,28 @@
 
 
 
-<meta name="description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
-<meta name="keywords" content="angularjs,java">
+<meta name="description" content="$watch 是在angularjs中常用的一个方法，他可以监听页面中的元素，在他们发生变化的时候，做出相应的变化。今天简单介绍一下我使用的两种用法。">
+<meta name="keywords" content="angularjs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目心得(四)">
-<meta property="og:url" content="http://yoursite.com/2018/04/10/project-experience-4/index.html">
+<meta property="og:title" content="Angularjs中的$watch">
+<meta property="og:url" content="http://yoursite.com/2018/05/19/angular-watch/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
-<meta property="og:image" content="http://yoursite.com/image/2018-04-13.1.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-04-13.2.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-04-13.3.png">
-<meta property="og:updated_time" content="2018-04-16T11:35:02.529Z">
+<meta property="og:description" content="$watch 是在angularjs中常用的一个方法，他可以监听页面中的元素，在他们发生变化的时候，做出相应的变化。今天简单介绍一下我使用的两种用法。">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.1.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.2.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.3.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.4.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.5.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.6.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.7.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.8.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.9.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-19.10.png">
+<meta property="og:updated_time" content="2018-05-19T13:22:25.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目心得(四)">
-<meta name="twitter:description" content="很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结. 功能简述强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.">
-<meta name="twitter:image" content="http://yoursite.com/image/2018-04-13.1.png">
+<meta name="twitter:title" content="Angularjs中的$watch">
+<meta name="twitter:description" content="$watch 是在angularjs中常用的一个方法，他可以监听页面中的元素，在他们发生变化的时候，做出相应的变化。今天简单介绍一下我使用的两种用法。">
+<meta name="twitter:image" content="http://yoursite.com/image/2018-05-19.1.png">
 
 
 
@@ -167,13 +174,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/10/project-experience-4/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/19/angular-watch/"/>
 
 
 
 
 
-  <title>项目心得(四) | 喵先生 的进阶之路</title>
+  <title>Angularjs中的$watch | 喵先生 的进阶之路</title>
   
 
 
@@ -290,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/project-experience-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/angular-watch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -307,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">项目心得(四)</h1>
+          <h1 class="post-title" itemprop="name headline">Angularjs中的$watch</h1>
         
 
         <div class="post-meta">
@@ -319,8 +326,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T21:31:57+08:00">
-                2018-04-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-19T18:44:33+08:00">
+                2018-05-19
               </time>
             
 
@@ -357,33 +364,34 @@
       
 
       
-        <p>很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结.</p>
-<h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2><p>强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.</p>
+        <p>$watch 是在angularjs中常用的一个方法，他可以监听页面中的元素，在他们发生变化的时候，做出相应的变化。今天简单介绍一下我使用的两种用法。</p>
 <a id="more"></a>
-<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><h3 id="1-数据写入"><a href="#1-数据写入" class="headerlink" title="1.数据写入"></a>1.数据写入</h3><p>这里的第一个难点是逻辑的复杂.由于器具检定能力统计设计到多个相关联的实体,然后还需要通过关联的实体计算得自己的字段值,所以写入过程较为复杂.</p>
-<p>数据写入的流程图如下:</p>
-<p><img src="/image/2018-04-13.1.png" alt=""></p>
-<p>首先获取所有的区域,然后按区域进行授权检定项目的初始化,将所有获取到的区域遍历一遍,获取每个区域上的授权检定项目,并按照器具类别进行分类.</p>
-<p>将所有的授权检定项目初始化完后,我们需要计算器具的检定能力,根据不同的区域,计算不同区域上的器具检定能力.</p>
-<p>第二个难点是数据量庞大.在我们的系统中,有上千条数据,以后还会有更多的数据.又经过上面的复杂处理,前台的后台访问的时候,就出现了500的报错.错误原因就是读取超时.这个问题我会在后面的博客中做详细的讲解.</p>
-<h3 id="2-数据读取"><a href="#2-数据读取" class="headerlink" title="2.数据读取"></a>2.数据读取</h3><p>这个部分的难点其实并没有数据写入的复杂,但是由于我自己对于项目的功能的理解出现了点偏差,加大了问题的难度.</p>
-<h4 id="器具的分类"><a href="#器具的分类" class="headerlink" title="器具的分类"></a>器具的分类</h4><p>首先的一个问题是这个器具检定能力的查询,他有几种查询方式,通过查询的参数不同,需要以不同的属性对其分类.比如:</p>
-<p><img src="/image/2018-04-13.2.png" alt=""></p>
-<p>这个问题我想到了两种解决办法.</p>
-<ul>
-<li><p>第一种是后台写一个方法,获取传入的参数,然后根据传入的参数判断这个这个查询应该以哪个参数进行分类.</p>
-</li>
-<li><p>第二种方法是前台通过点击查询条件判断传入的参数,然后调用不同的函数,每个函数对应不同的分组.</p>
-</li>
-</ul>
-<p>这两种解决方法我选择了后者,原因的后者的处理更加方便了,虽然写了多个方法,但是逻辑处理更加简单.</p>
-<h3 id="3-解决问题中遇到的问题"><a href="#3-解决问题中遇到的问题" class="headerlink" title="3.解决问题中遇到的问题"></a>3.解决问题中遇到的问题</h3><p>遇到的最大的问题是read time out,读取超时.这个问题是由于前台发起http请求访问后台,调用后台相应的方法.但这个方法长时间没有放回数据给前台,超过了前台等待的最大时间.</p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>我们程序运行慢,很大程度上的瓶颈是出现在数据库的IO上,所以,想要减小程序的运行时间,就可以减小访问数据库的次数.</p>
-<p>返回数据中有两个参数,一个是器具总数,一个是受检总数.</p>
-<p><img src="/image/2018-04-13.3.png" alt=""></p>
-<p>在获取器具总数的时候,调用了一个统计的方法,每次查询的每个分组都会调用一次这个方法,而这个方法每次执行都需要访问数据库,无疑为程序带来了很大的压力.所以解决的办法就是一次将所有的器具都获取出来,然后分组以后,每个分组都是一个 <code>List&lt;&gt;</code> ,器具总数也就是List的size.</p>
-<p>在获取受检总数的时候,需要判断器具是否具有检定能力,而这是有个变量来表示的,为true表示这个器具具有检定能力.开始获取的时候,也是每次都调用一个方法,然后方法中查找检定能力为true的器具,同样的,这回多次访问数据库.解决办法同上,将所有的器具都获取出来,然后在分组后直接判断这个器具的对应字段是否为true,如果是,受检总数加一.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个模块的部分处理的时间有点长了,也是出于对这个模块没有充分的理解,做了很多不必要的做功.但不得不说,在处理一个又一个的问题的时候,收获还是不小的.</p>
+<h2 id="监听一个对象"><a href="#监听一个对象" class="headerlink" title="监听一个对象"></a>监听一个对象</h2><p>先来看一下他的基本用法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$watch(string, function(), [optional]);</div></pre></td></tr></table></figure>
+<p>可以看到上面有三个参数，第一个是我们要监听的对象，他以字符串的方式呈现；</p>
+<p>第二个参数是一个回调函数，他是我们在监听到变化是做的动作。他有三个参数：newValue，oldValue，scope。看名字就能知道这三个参数的含义：新值，旧值，当前作用域。</p>
+<p>第三个参数是一个可选项，他是一个布尔值，使用<code>angular.equals</code>来比较对象，默认是false。</p>
+<p>示例代码：</p>
+<p>html部分：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-repeat</span>=<span class="string">'item in items'</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.title&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">'item.quantity'</span>&gt;</span>    </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">...</div></pre></td></tr></table></figure>
+<p>js部分：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$scope.items = [</div><div class="line">	&#123; <span class="attr">title</span>: <span class="string">'西瓜'</span>, <span class="attr">quantity</span>: <span class="number">8</span>, <span class="attr">price</span>: <span class="number">3.95</span> &#125;, </div><div class="line">	&#123; <span class="attr">title</span>: <span class="string">'西红柿'</span>, <span class="attr">quantity</span>: <span class="number">17</span>, <span class="attr">price</span>: <span class="number">12.95</span> &#125;, </div><div class="line">	&#123; <span class="attr">title</span>: <span class="string">'苹果'</span>, <span class="attr">quantity</span>: <span class="number">5</span>, <span class="attr">price</span>: <span class="number">6.95</span> &#125;];</div><div class="line"></div><div class="line">$scope.$watch(<span class="string">'items'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (newValue) &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这是一个新值！"</span>);</div><div class="line"> 	&#125;</div><div class="line">&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-19.1.png" alt=""><br><img src="/image/2018-05-19.2.png" alt=""><br><img src="/image/2018-05-19.3.png" alt=""><br>当我们改变输入框中的数字时，在控制台中就会出现<code>这是一个新值！</code>的字样。</p>
+<h2 id="监视多个对象"><a href="#监视多个对象" class="headerlink" title="监视多个对象"></a>监视多个对象</h2><p>$watch 在监视两个对象的时候，后面的参数都和上面的相同，只有第一个是不一样的，变成了一个数组。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$watch('[object1, object2]', function(newValue), [optional]);</div></pre></td></tr></table></figure>
+<p>在监听两个变量的时候，我们看一下<code>newValue</code>是怎么个样子的：</p>
+<p>下面的部分以项目中的指令为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scope.$watch(<span class="string">'[instrumentType, discipline]'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(newValue);</div><div class="line">&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-19.4.png" alt=""></p>
+<p>监听了两个对象，反回来的当然也是两个对象了。那么我们就可在分别对这两个对象做一些事情，在第一个对象变化的时候和第二个对象变化的时候做不同的事情。</p>
+<p>比如第一个变化的时候打印1，第二个变化的时候打印2：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">scope.$watch(<span class="string">'[instrumentType, discipline]'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (newValue[<span class="number">0</span>].selected &amp;&amp; newValue[<span class="number">0</span>].selected.id) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"1"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (newValue[<span class="number">1</span>].selected &amp;&amp; newValue[<span class="number">1</span>].selected.id) &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"2"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-19.5.png" alt=""><br><img src="/image/2018-05-19.6.png" alt=""><br><img src="/image/2018-05-19.7.png" alt=""></p>
+<p>这里就有人要问了，为什么我第一张打印的是2，而第二张打印的是1呢？原因是我们数组中对象的顺序与我们监听时设立的顺序是一样的：<code>[instrumentType, discipline]</code>。</p>
+<h2 id="我的应用"><a href="#我的应用" class="headerlink" title="我的应用"></a>我的应用</h2><p>两个指令相互关联，但是又允许单独使用，所以就使用了上面的监听两个对象的做法。</p>
+<p>效果展示：</p>
+<p><img src="/image/2018-05-19.8.png" alt=""><br><img src="/image/2018-05-19.9.png" alt=""><br><img src="/image/2018-05-19.10.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>$watch是一个有趣且灵活的函数，当然$watch的用法还不止我所说的这几种，还有很多其他的用法。<strong> <a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch" target="_blank" rel="external">参考网址</a> </strong></p>
 
       
     </div>
@@ -427,8 +435,6 @@
           
             <a href="/tags/angularjs/" rel="tag"># angularjs</a>
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
         </div>
       
 
@@ -440,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/19/project-experience-3/" rel="next" title="项目心得(三)">
-                <i class="fa fa-chevron-left"></i> 项目心得(三)
+              <a href="/2018/05/16/project-experience-6/" rel="next" title="项目心得(六)">
+                <i class="fa fa-chevron-left"></i> 项目心得(六)
               </a>
             
           </div>
@@ -449,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/10/java-asynchronous/" rel="prev" title="java中的异步机制">
-                java中的异步机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -607,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能简述"><span class="nav-number">1.</span> <span class="nav-text">功能简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#难点"><span class="nav-number">2.</span> <span class="nav-text">难点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据写入"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据写入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据读取"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#器具的分类"><span class="nav-number">2.2.1.</span> <span class="nav-text">器具的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-解决问题中遇到的问题"><span class="nav-number">2.3.</span> <span class="nav-text">3.解决问题中遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决办法"><span class="nav-number">2.3.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#监听一个对象"><span class="nav-number">1.</span> <span class="nav-text">监听一个对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监视多个对象"><span class="nav-number">2.</span> <span class="nav-text">监视多个对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的应用"><span class="nav-number">3.</span> <span class="nav-text">我的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

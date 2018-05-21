@@ -123,13 +123,13 @@
 
 
 
-<meta name="description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta name="description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
 <meta name="keywords" content="angularjs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angularjs中的$watch（二）">
 <meta property="og:url" content="http://yoursite.com/2018/05/21/angular-watch-2/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta property="og:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.1.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.2.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.3.png">
@@ -138,10 +138,10 @@
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.6.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.7.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-05-21.8.png">
-<meta property="og:updated_time" content="2018-05-21T11:42:34.813Z">
+<meta property="og:updated_time" content="2018-05-21T11:44:47.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Angularjs中的$watch（二）">
-<meta name="twitter:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta name="twitter:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
 <meta name="twitter:image" content="http://yoursite.com/image/2018-05-21.1.png">
 
 
@@ -363,6 +363,7 @@
 
       
         <p>上次介绍了两种<code>$watch</code>的用法，今天在跟大家分享另外的几种用法。</p>
+<a id="more"></a>
 <h2 id="watch监听函数"><a href="#watch监听函数" class="headerlink" title="$watch监听函数"></a>$watch监听函数</h2><p>将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$scope.food = <span class="number">1</span>;</div><div class="line">$scope.foodCounter = <span class="number">0</span>;</div><div class="line">$scope.$watch(</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> $scope.food; &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (newValue !== oldValue) &#123;</div><div class="line">        	<span class="built_in">console</span>.log(newValue);</div><div class="line">            $scope.foodCounter = $scope.foodCounter + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
 <p><img src="/image/2018-05-21.1.png" alt=""><br><img src="/image/2018-05-21.2.png" alt=""></p>

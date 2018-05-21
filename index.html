@@ -355,33 +355,14 @@
 
       
         
-          
-            <p>上次介绍了两种<code>$watch</code>的用法，今天在跟大家分享另外的几种用法。</p>
-<h2 id="watch监听函数"><a href="#watch监听函数" class="headerlink" title="$watch监听函数"></a>$watch监听函数</h2><p>将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$scope.food = <span class="number">1</span>;</div><div class="line">$scope.foodCounter = <span class="number">0</span>;</div><div class="line">$scope.$watch(</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> $scope.food; &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (newValue !== oldValue) &#123;</div><div class="line">        	<span class="built_in">console</span>.log(newValue);</div><div class="line">            $scope.foodCounter = $scope.foodCounter + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.1.png" alt=""><br><img src="/image/2018-05-21.2.png" alt=""></p>
-<p>然后让我们看一下我们监听的部分，看看是不是我们的返回值：</p>
-<p><img src="/image/2018-05-21.3.png" alt=""></p>
-<h2 id="watchGroup-watchExpressions-listener"><a href="#watchGroup-watchExpressions-listener" class="headerlink" title="$watchGroup(watchExpressions, listener)"></a>$watchGroup(watchExpressions, listener)</h2><p><code>$watchGroup</code>是scope上的另一个函数，他是<code>$watch</code>的功能扩展。他可以监听一个数组中的多个元素，当其中的人一个发生改变时，都会被监听到。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$scope.v1 = <span class="string">'a'</span>;</div><div class="line">$scope.v2 = <span class="string">'a'</span>;</div><div class="line">$scope.$watchGroup([<span class="string">'v1'</span>, <span class="string">'v2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">newValues, oldValues</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(newValues, oldValues);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.4.png" alt=""><br><img src="/image/2018-05-21.5.png" alt=""><br><img src="/image/2018-05-21.6.png" alt=""></p>
-<h2 id="watchCollection-obj-listener"><a href="#watchCollection-obj-listener" class="headerlink" title="$watchCollection(obj, listener)"></a>$watchCollection(obj, listener)</h2><p><code>$watchCollection</code>也是scope上的一个函数，同样为<code>$watch</code>的扩展。他可以监听一个对象，当对象中的任一个属性发生改变额时候，都会被监听到。</p>
-<blockquote>
-<p><code>obj</code> 部分同样可以是String或是function。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$scope.people = &#123;</div><div class="line">    name: <span class="string">'zhangsan'</span>,</div><div class="line">    sex: <span class="string">'男'</span></div><div class="line">&#125;;</div><div class="line">$scope.dataCount = <span class="number">0</span>;</div><div class="line"></div><div class="line">$scope.$watchCollection(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    $scope.dataCount = $scope.dataCount + <span class="number">1</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.7.png" alt=""><br><img src="/image/2018-05-21.8.png" alt=""></p>
-<p>这个方法的功能跟使用<code>$watch</code>的第三个参数是一样的效果：当<code>$watch</code>的第三个参数为true的时候，就会实现这样的效果。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
-<p>上一次我们已经提到过了，在这里使用true，表示新旧值将使用<code>angular.equals</code>来进行判等。在官方文档中有这么一句话：</p>
-<blockquote>
-<p>Both objects or values are of the same type and <code>all of their properties</code> are equal by comparing them with angular.equals.</p>
-</blockquote>
-<p>可以看到，这里的判等需要每个属性都相等。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>灵活的使用$watch以及相关的方法，会使你的展现的功能富有趣味，富有灵活性。</p>
-<p><strong> 官方参考：<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch" target="_blank" rel="external">https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch</a></strong></p>
-
-          
+          <p>上次介绍了两种<code>$watch</code>的用法，今天在跟大家分享另外的几种用法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/21/angular-watch-2/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

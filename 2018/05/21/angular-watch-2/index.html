@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="angularjs," />
 
 
 
@@ -123,17 +123,26 @@
 
 
 
-<meta name="description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
-<meta name="keywords" content="java">
+<meta name="description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta name="keywords" content="angularjs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java中的异步机制">
-<meta property="og:url" content="http://yoursite.com/2018/04/10/java-asynchronous/index.html">
+<meta property="og:title" content="Angularjs中的$watch（二）">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/angular-watch-2/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
-<meta property="og:updated_time" content="2018-04-19T06:21:24.754Z">
+<meta property="og:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.1.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.2.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.3.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.4.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.5.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.6.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.7.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-21.8.png">
+<meta property="og:updated_time" content="2018-05-21T11:42:34.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java中的异步机制">
-<meta name="twitter:description" content="在最近的项目中,前台出现了一次500的异常,错误信息是 read time out .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制. 为什么要使用异步简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使">
+<meta name="twitter:title" content="Angularjs中的$watch（二）">
+<meta name="twitter:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。 $watch监听函数将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。 1234567891011$scope.food = 1;$scope.foodCounter = 0;$scope.$watch(    function() &amp;#123; return $scope.food; &amp;#125;,">
+<meta name="twitter:image" content="http://yoursite.com/image/2018-05-21.1.png">
 
 
 
@@ -163,13 +172,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/10/java-asynchronous/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/angular-watch-2/"/>
 
 
 
 
 
-  <title>java中的异步机制 | 喵先生 的进阶之路</title>
+  <title>Angularjs中的$watch（二） | 喵先生 的进阶之路</title>
   
 
 
@@ -286,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/java-asynchronous/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/angular-watch-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -303,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java中的异步机制</h1>
+          <h1 class="post-title" itemprop="name headline">Angularjs中的$watch（二）</h1>
         
 
         <div class="post-meta">
@@ -315,8 +324,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T21:33:05+08:00">
-                2018-04-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T16:20:25+08:00">
+                2018-05-21
               </time>
             
 
@@ -353,34 +362,30 @@
       
 
       
-        <p>在最近的项目中,前台出现了一次500的异常,错误信息是 <code>read time out</code> .也就是说,调用的后台方法执行时间过长,然后在前台等待的时间里,没有方法没有执行结束,没有相应的相应,所以这时候,前后台的连接就断开了.而此次我解决问题选择的方法是在后台使用异步机制.</p>
-<h2 id="为什么要使用异步"><a href="#为什么要使用异步" class="headerlink" title="为什么要使用异步"></a>为什么要使用异步</h2><p>简单来说,使用异步出于无奈.在同一个线程中,一个函数执行的时间过长,那么后面的函数就只能等着,那么我们就需要另外使用一个线程,将运行时间长的函数放到这个单独的线程中去执行.</p>
-<a id="more"></a>
-<h2 id="java-异步编程"><a href="#java-异步编程" class="headerlink" title="java 异步编程"></a>java 异步编程</h2><p>下面介绍两种 <code>java</code> 中的异步编程方式.</p>
-<h3 id="Future方式的异步编程"><a href="#Future方式的异步编程" class="headerlink" title="Future方式的异步编程"></a><code>Future</code>方式的异步编程</h3><p><code>Future</code> 表示未来的某个异步计算的结果, 当我们向线程池提交任务的时候,就会获得这个对象. 然后可以使用 <code>get</code> 方法来获取计算完成的结果,并且只有在计算完成时才能使用.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ArchiveSearcher</span> </span>&#123; <span class="function">String <span class="title">search</span><span class="params">(String target)</span></span>; &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</div><div class="line">    ExecutorService executor = ...        <span class="comment">// 执行者,用来执行函数</span></div><div class="line">    ArchiveSearcher searcher = ...</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showSearch</span><span class="params">(<span class="keyword">final</span> String target)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Future&lt;String&gt; future = executor.submit(<span class="keyword">new</span> Callable&lt;String&gt;() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> searcher.search(target);</div><div class="line">        &#125;&#125;);</div><div class="line">        displayOtherThings();           <span class="comment">// 在这里可以做一些其他的事情</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            displayText(future.get());  <span class="comment">// 使用 future, 获取结果</span></div><div class="line">        &#125; <span class="keyword">catch</span> (ExecutionException ex) &#123; </div><div class="line">            cleanup(); </div><div class="line">            <span class="keyword">return</span>; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到,在这段代码中,我们先定义了一个执行者,他会执行未来的某个函数.然后我们定义了一个Future对象,他的值就是上面的执行者 <code>executor</code> 执行了 <code>call</code> 函数后的返回值.这个call函数中就是我们要执行的运行时间很长的函数.在他之后,这个函数或交给另一个线程去执行,而我们也不用等待这个函数执行完,可以去做一些其他的事情.最后,使用 <code>Future</code> 对象中的get方法,获取函数执行后的返回值.</p>
+        <p>上次介绍了两种<code>$watch</code>的用法，今天在跟大家分享另外的几种用法。</p>
+<h2 id="watch监听函数"><a href="#watch监听函数" class="headerlink" title="$watch监听函数"></a>$watch监听函数</h2><p>将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$scope.food = <span class="number">1</span>;</div><div class="line">$scope.foodCounter = <span class="number">0</span>;</div><div class="line">$scope.$watch(</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> $scope.food; &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (newValue !== oldValue) &#123;</div><div class="line">        	<span class="built_in">console</span>.log(newValue);</div><div class="line">            $scope.foodCounter = $scope.foodCounter + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-21.1.png" alt=""><br><img src="/image/2018-05-21.2.png" alt=""></p>
+<p>然后让我们看一下我们监听的部分，看看是不是我们的返回值：</p>
+<p><img src="/image/2018-05-21.3.png" alt=""></p>
+<h2 id="watchGroup-watchExpressions-listener"><a href="#watchGroup-watchExpressions-listener" class="headerlink" title="$watchGroup(watchExpressions, listener)"></a>$watchGroup(watchExpressions, listener)</h2><p><code>$watchGroup</code>是scope上的另一个函数，他是<code>$watch</code>的功能扩展。他可以监听一个数组中的多个元素，当其中的人一个发生改变时，都会被监听到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$scope.v1 = <span class="string">'a'</span>;</div><div class="line">$scope.v2 = <span class="string">'a'</span>;</div><div class="line">$scope.$watchGroup([<span class="string">'v1'</span>, <span class="string">'v2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">newValues, oldValues</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(newValues, oldValues);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-21.4.png" alt=""><br><img src="/image/2018-05-21.5.png" alt=""><br><img src="/image/2018-05-21.6.png" alt=""></p>
+<h2 id="watchCollection-obj-listener"><a href="#watchCollection-obj-listener" class="headerlink" title="$watchCollection(obj, listener)"></a>$watchCollection(obj, listener)</h2><p><code>$watchCollection</code>也是scope上的一个函数，同样为<code>$watch</code>的扩展。他可以监听一个对象，当对象中的任一个属性发生改变额时候，都会被监听到。</p>
 <blockquote>
-<p><strong> 注意: </strong> 这里有可能会抛出一个执行异常,所以我们需要在这里使用try catch来处理一下异常.</p>
+<p><code>obj</code> 部分同样可以是String或是function。</p>
 </blockquote>
-<h3 id="CompletableFuture方式的异步编程"><a href="#CompletableFuture方式的异步编程" class="headerlink" title="CompletableFuture方式的异步编程"></a><code>CompletableFuture</code>方式的异步编程</h3><p>首先肯定就有人会问,有了Future,那为什么还要选择CompletableFuture这种异步编程的方式呢?</p>
-<p>答案显而易见:<strong>Future存在缺陷</strong>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$scope.people = &#123;</div><div class="line">    name: <span class="string">'zhangsan'</span>,</div><div class="line">    sex: <span class="string">'男'</span></div><div class="line">&#125;;</div><div class="line">$scope.dataCount = <span class="number">0</span>;</div><div class="line"></div><div class="line">$scope.$watchCollection(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    $scope.dataCount = $scope.dataCount + <span class="number">1</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-21.7.png" alt=""><br><img src="/image/2018-05-21.8.png" alt=""></p>
+<p>这个方法的功能跟使用<code>$watch</code>的第三个参数是一样的效果：当<code>$watch</code>的第三个参数为true的时候，就会实现这样的效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p>上一次我们已经提到过了，在这里使用true，表示新旧值将使用<code>angular.equals</code>来进行判等。在官方文档中有这么一句话：</p>
 <blockquote>
-<p>Future虽然实现了异步,但是他缺少通知机制,所以我们并不能知道函数什么时候执行结束.</p>
-<p>使用阻塞,在<code>future.get()</code>的地方等待函数返回结果,但是这样就又成了同步的方式了.</p>
-<p>使用<code>isDone</code>来进行轮询判断Future是否执行结束,但这样又会显得很多余,浪费很多的CPU.</p>
+<p>Both objects or values are of the same type and <code>all of their properties</code> are equal by comparing them with angular.equals.</p>
 </blockquote>
-<p>有问题必然就要解决,所以就有了我们的 <code>CompletableFuture</code> 的编程方式.</p>
-<p><code>CompletableFuture</code> 这种异步编程的方式是在java8才出现的新的异步编程方式.他解决了一些在Future上存在的问题.使得java完整的实现了非阻塞方式的异步编程.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">CompletableFuture&lt;Void&gt; future = CompletableFuture.runAsync(() -&gt; &#123;</div><div class="line">    System.out.println(<span class="string">"Hello"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    future.get();</div><div class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(<span class="string">"CompletableFuture"</span>);</div></pre></td></tr></table></figure>
-<p>这里我们可以看到,我们调用了<code>CompletableFuture</code>中的一个静态方法<code>runAsync()</code>来执行异步代码(这里会默认分配给他一个线程池), 他会返回一个没有返回值的<code>CompletableFuture</code>.</p>
-<p>当然, <code>CompletableFuture</code> 当中还有很多的静态方法,可以获取没有返回值的,同样也可以获取有返回值的.这里就不一一介绍了.在最后我会给出链接,读者可自行学习.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然我们有异步编程的方式去解决函数执行时间长的问题,但是却不要首先想到这个执行办法,首先还是要看我们的函数时候能够减少数据库的IO操作,然后再去想是否应该使用异步编程.</p>
-<p><strong> 官方参考: </strong></p>
-<blockquote>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html" target="_blank" rel="external">https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html</a></p>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="external">https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html</a></p>
-</blockquote>
+<p>可以看到，这里的判等需要每个属性都相等。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>灵活的使用$watch以及相关的方法，会使你的展现的功能富有趣味，富有灵活性。</p>
+<p><strong> 官方参考：<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch" target="_blank" rel="external">https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch</a></strong></p>
 
       
     </div>
@@ -422,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/angularjs/" rel="tag"># angularjs</a>
           
         </div>
       
@@ -435,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/10/project-experience-4/" rel="next" title="项目心得(四)">
-                <i class="fa fa-chevron-left"></i> 项目心得(四)
+              <a href="/2018/05/19/angular-watch/" rel="next" title="Angularjs中的$watch">
+                <i class="fa fa-chevron-left"></i> Angularjs中的$watch
               </a>
             
           </div>
@@ -444,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/29/docker/" rel="prev" title="Docker 简记">
-                Docker 简记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用异步"><span class="nav-number">1.</span> <span class="nav-text">为什么要使用异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-异步编程"><span class="nav-number">2.</span> <span class="nav-text">java 异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Future方式的异步编程"><span class="nav-number">2.1.</span> <span class="nav-text">Future方式的异步编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletableFuture方式的异步编程"><span class="nav-number">2.2.</span> <span class="nav-text">CompletableFuture方式的异步编程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch监听函数"><span class="nav-number">1.</span> <span class="nav-text">$watch监听函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchGroup-watchExpressions-listener"><span class="nav-number">2.</span> <span class="nav-text">$watchGroup(watchExpressions, listener)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchCollection-obj-listener"><span class="nav-number">3.</span> <span class="nav-text">$watchCollection(obj, listener)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

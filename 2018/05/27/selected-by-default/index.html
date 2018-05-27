@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angularjs," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="问题描述在angular项目中，点击编辑人员操作，会在表单中默认显示选择的人员的信息，信息以下拉选框的形式展现，每个下拉选框都是一个指令。这时，技术机构指令和管理部门指令均以同一个字段：department作为他们的选项。他们两个都是部门，只是类型不同。对于同一个人员，只能有一个部门，所以要默认显示技术机构或管理部门。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于实现下拉选框的默认选中问题">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/selected-by-default/index.html">
+<meta property="og:site_name" content="喵先生 的进阶之路">
+<meta property="og:description" content="问题描述在angular项目中，点击编辑人员操作，会在表单中默认显示选择的人员的信息，信息以下拉选框的形式展现，每个下拉选框都是一个指令。这时，技术机构指令和管理部门指令均以同一个字段：department作为他们的选项。他们两个都是部门，只是类型不同。对于同一个人员，只能有一个部门，所以要默认显示技术机构或管理部门。">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-27.1.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-27.2.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-05-27.3.png">
+<meta property="og:updated_time" content="2018-05-27T08:35:03.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于实现下拉选框的默认选中问题">
+<meta name="twitter:description" content="问题描述在angular项目中，点击编辑人员操作，会在表单中默认显示选择的人员的信息，信息以下拉选框的形式展现，每个下拉选框都是一个指令。这时，技术机构指令和管理部门指令均以同一个字段：department作为他们的选项。他们两个都是部门，只是类型不同。对于同一个人员，只能有一个部门，所以要默认显示技术机构或管理部门。">
+<meta name="twitter:image" content="http://yoursite.com/image/2018-05-27.1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/selected-by-default/"/>
+
+
+
+
+
+  <title>关于实现下拉选框的默认选中问题 | 喵先生 的进阶之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">喵先生 的进阶之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">简单  快乐  喵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/selected-by-default/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Po Shichao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵先生 的进阶之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于实现下拉选框的默认选中问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T14:45:09+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在<code>angular</code>项目中，点击编辑人员操作，会在表单中默认显示选择的人员的信息，信息以下拉选框的形式展现，每个下拉选框都是一个指令。这时，<code>技术机构</code>指令和<code>管理部门</code>指令均以同一个字段：<code>department</code>作为他们的选项。他们两个都是部门，只是类型不同。对于同一个人员，只能有一个部门，所以要默认显示技术机构或管理部门。</p>
+<a id="more"></a>
+<h2 id="排查原因"><a href="#排查原因" class="headerlink" title="排查原因"></a>排查原因</h2><p>首先看一下我们的两个指令：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showInstrumentUser"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>技术机构<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-instrument-user</span> <span class="attr">ng-model</span>=<span class="string">"data.department"</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">data-config</span>=<span class="string">"&#123;departmentType: '技术机构'&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-instrument-user</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showManagementDepartment"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>管理部门<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-management-department</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">ng-model</span>=<span class="string">"data.department"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-management-department</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">...</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-27.1.png" alt=""></p>
+<p>上面是我点击编辑后，根据id获取的人员有一个部门字段，内容为管理部门，这时应该默认选中管理部门。但是并没有选择上。所以让我们删除一下技术机构再看一下效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showManagementDepartment"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>管理部门<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-management-department</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">ng-model</span>=<span class="string">"data.department"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-management-department</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">...</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-27.2.png" alt=""></p>
+<p>这回默认选中了管理部门。这里不妨大胆的猜测一下原因：</p>
+<blockquote>
+<p><strong>由于技术机构的存在，我们将部门传进指令中，没有对应的技术机构，所以部门就成了空。</strong></p>
+</blockquote>
+<p>让我们将技术机构再放回来，然后调换一下两个指令的位置。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showManagementDepartment"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>管理部门<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-management-department</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">ng-model</span>=<span class="string">"data.department"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-management-department</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showInstrumentUser"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>技术机构<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-instrument-user</span> <span class="attr">ng-model</span>=<span class="string">"data.department"</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">data-config</span>=<span class="string">"&#123;departmentType: '技术机构'&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-instrument-user</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">...</div></pre></td></tr></table></figure>
+<p><img src="/image/2018-05-27.3.png" alt=""></p>
+<p>可以看到管理部门同样被默认选择上了，说明我们上面的猜测正确。</p>
+<p>由于<code>ng-model</code>在angularjs中会使数据双向绑定，当前面的技术机构没有对应的对象存在时，它就会选中空值，这时又将这个空值绑定在ng-model上。两个指令的ng-model都绑定的是统一数据，所以后面的管理部门在取选中的时候，就是根据空值来选择的，当然选择不上了。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>我们最开始在controller中通过id获取对象时，直接将返回的对象中的属性给<code>ng-model</code>了，导致两个指令对应同一参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">self.getOneById = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">    PersonnelPersonnelsupervisefileService.getOneById(id, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        $scope.data = data;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>既然两个指令绑定同一变量会混乱，那我让他们绑定不同的变量是不是就可以了呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">$scope.instrumentUser = <span class="literal">undefined</span>;			<span class="comment">// 初始化技术机构	</span></div><div class="line">$scope.managementDepartment = <span class="literal">undefined</span>;		<span class="comment">// 初始化管理部门</span></div><div class="line">self.getOneById = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">    PersonnelPersonnelsupervisefileService.getOneById(id, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        $scope.data = data; <span class="comment">// 赋值	</span></div><div class="line">        $scope.params.district = data.department.district; <span class="comment">// 为区域赋值</span></div><div class="line"></div><div class="line">        <span class="comment">// 如果数据的部门是管理部门,为管理部门赋值</span></div><div class="line">        <span class="keyword">if</span> (data.department.departmentType.pinyin === <span class="string">"guanlibumen"</span>) &#123;</div><div class="line">            $scope.managementDepartment = data.department;</div><div class="line"></div><div class="line">            <span class="comment">// 如果数据的部门是技术机构，为技术机构赋值</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data.department.departmentType.pinyin === <span class="string">"jishujigou"</span>) &#123;</div><div class="line">            $scope.instrumentUser = data.department;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>首先定义两个变量，用来绑定不同的指令，当我们编辑的人员的部门的类型是技术机构，就为<code>技术机构</code>这个对象赋值；如果为部门类型是管理部门，就为<code>管理部门</code>赋值；否则均不赋值。然后再让两个指令绑定不同的变量。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showInstrumentUser"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>技术机构<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-instrument-user</span> <span class="attr">ng-model</span>=<span class="string">"instrumentUser"</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">data-config</span>=<span class="string">"&#123;departmentType: '技术机构'&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-instrument-user</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">ng-show</span>=<span class="string">"showManagementDepartment"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"col-sm-4 control-label"</span>&gt;</span>管理部门<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">yunzhi-management-department</span> <span class="attr">data-district</span>=<span class="string">"params.district"</span> <span class="attr">ng-model</span>=<span class="string">"managementDepartment"</span>&gt;</span><span class="tag">&lt;/<span class="name">yunzhi-management-department</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>到此，问题解决。但是肯定有细心的小朋友发现了，你在这里将部门用两个变量来表示，但对于人员来说这两个都不是我们要的字段，那保存的时候怎么绑定部门呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="string">'[instrumentUser, managementDepartment]'</span>, </div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> instrumentUser = newValue[<span class="number">0</span>]; <span class="comment">// 技术机构</span></div><div class="line">    <span class="keyword">var</span> managementDepartment = newValue[<span class="number">1</span>]; <span class="comment">// 管理部门</span></div><div class="line"></div><div class="line">    <span class="comment">// 当选择了技术机构，为监督抽查人员的部门字段赋值</span></div><div class="line">    <span class="keyword">if</span> (instrumentUser &amp;&amp; instrumentUser.id) &#123;</div><div class="line">        $scope.data.department = instrumentUser;</div><div class="line"></div><div class="line">        <span class="comment">// 当选择了管理部门，为监督抽查人员的部门字段赋值</span></div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (managementDepartment &amp;&amp; managementDepartment.id) &#123;</div><div class="line">        $scope.data.department = managementDepartment;</div><div class="line"></div><div class="line">        <span class="comment">// 当什么都没选时，为监督抽查人员的部门字段赋空值</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> ($scope.data) &#123;</div><div class="line">            $scope.data.department = instrumentUser = managementDepartment;</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p>在这里我们监听一下技术机构和管理部门，当他们选择的时候，将他们选择的值赋给人员的部门。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的问题中，显然我们的解决办法显得并不是多么高深的方法，很简单。所以解决问题的关键在快速的定位问题产生的原因，当原因找到后，问题也就迎刃而解了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifu.jpg" alt="Po Shichao Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angularjs/" rel="tag"># angularjs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/angular-watch-2/" rel="next" title="Angularjs中的$watch（二）">
+                <i class="fa fa-chevron-left"></i> Angularjs中的$watch（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Po Shichao" />
+            
+              <p class="site-author-name" itemprop="name">Po Shichao</p>
+              <p class="site-description motion-element" itemprop="description">简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/poshichao" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.com/" title="梦云智团队首页" target="_blank">梦云智团队首页</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.cn/" title="梦云智团队博客" target="_blank">梦云智团队博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查原因"><span class="nav-number">2.</span> <span class="nav-text">排查原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Po Shichao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

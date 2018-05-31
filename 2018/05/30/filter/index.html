@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angularjs," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近实现了一个查询，在查询中遇到了一些问题，在这里记录一下。 问题描述在实现一个人员的查询功能的时候，有两个查询条件：人员资质和有效期至，人员和人员资质的关系是1：n，有效期至是人员资质的一个字段。在实现这个查寻的时候，而在后台通过n的一方来查询1的一方是很不好实现的。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现`n:1`的查询">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/filter/index.html">
+<meta property="og:site_name" content="喵先生 的进阶之路">
+<meta property="og:description" content="最近实现了一个查询，在查询中遇到了一些问题，在这里记录一下。 问题描述在实现一个人员的查询功能的时候，有两个查询条件：人员资质和有效期至，人员和人员资质的关系是1：n，有效期至是人员资质的一个字段。在实现这个查寻的时候，而在后台通过n的一方来查询1的一方是很不好实现的。">
+<meta property="og:updated_time" content="2018-05-31T03:11:13.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现`n:1`的查询">
+<meta name="twitter:description" content="最近实现了一个查询，在查询中遇到了一些问题，在这里记录一下。 问题描述在实现一个人员的查询功能的时候，有两个查询条件：人员资质和有效期至，人员和人员资质的关系是1：n，有效期至是人员资质的一个字段。在实现这个查寻的时候，而在后台通过n的一方来查询1的一方是很不好实现的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/filter/"/>
+
+
+
+
+
+  <title>实现`n:1`的查询 | 喵先生 的进阶之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">喵先生 的进阶之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">简单  快乐  喵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Po Shichao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵先生 的进阶之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实现`n:1`的查询</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T15:52:19+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近实现了一个查询，在查询中遇到了一些问题，在这里记录一下。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在实现一个人员的查询功能的时候，有两个查询条件：<code>人员资质</code>和<code>有效期至</code>，人员和人员资质的关系是<code>1：n</code>，有效期至是人员资质的一个字段。在实现这个查寻的时候，而在后台通过n的一方来查询1的一方是很不好实现的。</p>
+<a id="more"></a>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>这个问题最后考虑在前台使用过滤器来实现，首先将满足其他查询条件的查询出来，然后将没有相应人员资质的人员过滤掉，这样就实现了。</p>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="1-引入过滤器"><a href="#1-引入过滤器" class="headerlink" title="1.引入过滤器"></a>1.引入过滤器</h3><p>首先我们知道，过滤器是通过管道符来使用的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objects | filter</div></pre></td></tr></table></figure>
+<p>然后就是过滤器参数的问题，在管道符前面的<code>objects</code>就是第一个参数，过滤器至少有一个参数。现在有人员资质和有效期至，这两个是过滤的条件，必然也要作为参数。那么过滤器是如何传参的呢？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objects | filter: param</div></pre></td></tr></table></figure>
+<p>在过滤器后面写一个冒号<code>:</code>，然后冒号后面的就是参数。那两个参数呢？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objects | filter: param1: param2</div></pre></td></tr></table></figure>
+<p>连续使用冒号<code>:</code>就可以传多个参数了。好了，下面来解决我们的问题。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tbody</span> <span class="attr">ng-repeat</span>=<span class="string">"person in persons | yunzhiPersonnel: params.qualifierCertificateType: params.validityDate"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后实现过滤器的基本思想就是首先遍历人员，再遍历人员中的人员资质，当人员资质和查询的人员资质相同的时候，就将这个人员放到返回列表中，最后统一返回。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">self.getQualifierWithQualifierCertificate = <span class="function"><span class="keyword">function</span>(<span class="params">personnels, qualifierCertificateType, validityDate</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> persons = []; <span class="comment">// 初始化符合条件的人员</span></div><div class="line"></div><div class="line">    <span class="comment">// 遍历人员</span></div><div class="line">    angular.forEach(personnels, <span class="function"><span class="keyword">function</span>(<span class="params">personnel</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> qualifierCertificates = personnel.qualifier.qualifierCertificate; <span class="comment">// 获取人员资质</span></div><div class="line"></div><div class="line">        <span class="comment">// 如果输入了两个查询条件</span></div><div class="line">        <span class="keyword">if</span> (qualifierCertificateType.id &amp;&amp; validityDate) &#123;</div><div class="line"></div><div class="line">            <span class="comment">// 遍历人员资质</span></div><div class="line">            angular.forEach(qualifierCertificates, <span class="function"><span class="keyword">function</span>(<span class="params">qualifierCertificates</span>) </span>&#123;</div><div class="line"></div><div class="line">                <span class="comment">// 当资格证类别与查询的资格证类别相同，并且有效期至也相同时，将人员放入返回人员数组中</span></div><div class="line">                <span class="keyword">if</span> (qualifierCertificates.qualifierCertificateType.name === qualifierCertificateType.name &amp;&amp; qualifierCertificates.validityDate === validityDate) &#123;</div><div class="line">                    persons.push(personnel);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            <span class="comment">// 如果输入资格证类别    </span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (qualifierCertificateType.id) &#123;</div><div class="line">            <span class="comment">// 遍历人员资质</span></div><div class="line">            angular.forEach(qualifierCertificates, <span class="function"><span class="keyword">function</span>(<span class="params">qualifierCertificates</span>) </span>&#123;</div><div class="line">                <span class="comment">// 资格证类别与查询的资格证类别相同</span></div><div class="line">                <span class="keyword">if</span> (qualifierCertificates.qualifierCertificateType.name === qualifierCertificateType.name) &#123;</div><div class="line">                    persons.push(personnel);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            <span class="comment">// 输入有效期至   </span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 遍历人员资质</span></div><div class="line">            angular.forEach(qualifierCertificates, <span class="function"><span class="keyword">function</span>(<span class="params">qualifierCertificates</span>) </span>&#123;</div><div class="line">                <span class="comment">// 有效期至与查询的有效期至相同</span></div><div class="line">                <span class="keyword">if</span> (qualifierCertificates.validityDate === validityDate) &#123;</div><div class="line">                    persons.push(personnel);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> persons;</div><div class="line"></div><div class="line">&#125;;</div><div class="line">...</div></pre></td></tr></table></figure>
+<h3 id="2-过滤器及时生效"><a href="#2-过滤器及时生效" class="headerlink" title="2.过滤器及时生效"></a>2.过滤器及时生效</h3><p>上面我在设置参数的时候，直接将查询的参数当做过滤参数，所以一旦输入了查询条件，就会直接过滤。而我们要的效果是，在用户点击查询后在显示过滤后的数据。</p>
+<p>首先想到的是，在给这个过滤器一个参数：是否点击了查询。只有当用户点击了查询，这个参数为<code>true</code>，然后执行过滤，没有点击，这个参数为<code>false</code>，不执行过滤。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tbody</span> <span class="attr">ng-repeat</span>=<span class="string">"person in persons | yunzhiPersonnel: params.qualifierCertificateType: params.validityDate：touched"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="keyword">if</span>(touched) &#123;</div><div class="line">	<span class="keyword">return</span> self.getQualifierWithQualifierCertificate(personnels, qualifierCertificateType, validityDate);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="keyword">return</span> personnels;</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>但是这种解决方法并不好。一个问题是，这种解决方法会带来一些其他的问题，比如说先查询了一次，再查询一次就又会出现上面直接出结果的问题；另一个问题，也是主要的问题，这种方法不符合规范，过滤器的职能就是过滤，不应该在过滤器中判断什么时候开始过滤，什么时候不过滤，而应该是我在需要过滤的时候，再给他过滤条件，不需要过滤的时候，就不给他过滤条件。</p>
+<p>所以，在控制器中重新定义一个函数，用来获取过滤条件，这个方法在点击查询的时候调用。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tbody</span> <span class="attr">ng-repeat</span>=<span class="string">"person in persons | yunzhiPersonnel: filterParams.qualifierCertificateType: filterParams.validityDate"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取过滤参数</span></div><div class="line">self.getFilterParams = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        qualifierCertificateType: $scope.params.qualifierCertificateType, <span class="comment">// 资格证类别</span></div><div class="line">        validityDate: $scope.params.validityDate, <span class="comment">// 有效期至</span></div><div class="line">        <span class="comment">// 这里还可以添加其他过滤条件</span></div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 提交查询</span></div><div class="line">self.submit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ...</div><div class="line">    $scope.filterParams = self.getFilterParams(); <span class="comment">// 设置过滤条件</span></div><div class="line">    ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们这种mvc的开发思想，在实现每一部分的时候，都要尽可能的使每一部分都只做自己的功能，这样不仅能增加代码的可读性，同时也增加了可维护性，在后面进行改写的时候也会减小压力。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifu.jpg" alt="Po Shichao Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angularjs/" rel="tag"># angularjs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/selected-by-default/" rel="next" title="关于实现下拉选框的默认选中问题">
+                <i class="fa fa-chevron-left"></i> 关于实现下拉选框的默认选中问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Po Shichao" />
+            
+              <p class="site-author-name" itemprop="name">Po Shichao</p>
+              <p class="site-description motion-element" itemprop="description">简单的事重复做，你就是专家；重复的事情认真做，你就是赢家。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/poshichao" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.com/" title="梦云智团队首页" target="_blank">梦云智团队首页</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.mengyunzhi.cn/" title="梦云智团队博客" target="_blank">梦云智团队博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">2.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决过程"><span class="nav-number">3.</span> <span class="nav-text">解决过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-引入过滤器"><span class="nav-number">3.1.</span> <span class="nav-text">1.引入过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-过滤器及时生效"><span class="nav-number">3.2.</span> <span class="nav-text">2.过滤器及时生效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Po Shichao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

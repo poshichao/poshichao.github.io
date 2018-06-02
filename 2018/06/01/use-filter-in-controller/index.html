@@ -123,26 +123,17 @@
 
 
 
-<meta name="description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
+<meta name="description" content="在以前的项目中，只有在V层使用过过滤器，前面我也介绍过滤过滤器的使用，但是在angular这么强大的框架，是不可能让我们失望的。在C层controller中同样可以使用过滤器。">
 <meta name="keywords" content="angularjs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angularjs中的$watch（二）">
-<meta property="og:url" content="http://yoursite.com/2018/05/21/angular-watch-2/index.html">
+<meta property="og:title" content="在控制器中使用过滤器">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/use-filter-in-controller/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.1.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.2.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.3.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.4.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.5.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.6.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.7.png">
-<meta property="og:image" content="http://yoursite.com/image/2018-05-21.8.png">
-<meta property="og:updated_time" content="2018-05-21T11:44:47.771Z">
+<meta property="og:description" content="在以前的项目中，只有在V层使用过过滤器，前面我也介绍过滤过滤器的使用，但是在angular这么强大的框架，是不可能让我们失望的。在C层controller中同样可以使用过滤器。">
+<meta property="og:updated_time" content="2018-06-02T07:03:15.954Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angularjs中的$watch（二）">
-<meta name="twitter:description" content="上次介绍了两种$watch的用法，今天在跟大家分享另外的几种用法。">
-<meta name="twitter:image" content="http://yoursite.com/image/2018-05-21.1.png">
+<meta name="twitter:title" content="在控制器中使用过滤器">
+<meta name="twitter:description" content="在以前的项目中，只有在V层使用过过滤器，前面我也介绍过滤过滤器的使用，但是在angular这么强大的框架，是不可能让我们失望的。在C层controller中同样可以使用过滤器。">
 
 
 
@@ -172,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/21/angular-watch-2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/01/use-filter-in-controller/"/>
 
 
 
 
 
-  <title>Angularjs中的$watch（二） | 喵先生 的进阶之路</title>
+  <title>在控制器中使用过滤器 | 喵先生 的进阶之路</title>
   
 
 
@@ -295,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/angular-watch-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/use-filter-in-controller/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -312,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Angularjs中的$watch（二）</h1>
+          <h1 class="post-title" itemprop="name headline">在控制器中使用过滤器</h1>
         
 
         <div class="post-meta">
@@ -324,8 +315,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T16:20:25+08:00">
-                2018-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-01T20:11:07+08:00">
+                2018-06-01
               </time>
             
 
@@ -362,31 +353,21 @@
       
 
       
-        <p>上次介绍了两种<code>$watch</code>的用法，今天在跟大家分享另外的几种用法。</p>
+        <p>在以前的项目中，只有在V层使用过过滤器，前面我也介绍过滤过滤器的使用，但是在<code>angular</code>这么强大的框架，是不可能让我们失望的。在C层<code>controller</code>中同样可以使用过滤器。</p>
 <a id="more"></a>
-<h2 id="watch监听函数"><a href="#watch监听函数" class="headerlink" title="$watch监听函数"></a>$watch监听函数</h2><p>将监听的参数部分换为函数。虽然监听的是函数，但实际上监听的是函数的返回值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$scope.food = <span class="number">1</span>;</div><div class="line">$scope.foodCounter = <span class="number">0</span>;</div><div class="line">$scope.$watch(</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> $scope.food; &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (newValue !== oldValue) &#123;</div><div class="line">        	<span class="built_in">console</span>.log(newValue);</div><div class="line">            $scope.foodCounter = $scope.foodCounter + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.1.png" alt=""><br><img src="/image/2018-05-21.2.png" alt=""></p>
-<p>然后让我们看一下我们监听的部分，看看是不是我们的返回值：</p>
-<p><img src="/image/2018-05-21.3.png" alt=""></p>
-<h2 id="watchGroup-watchExpressions-listener"><a href="#watchGroup-watchExpressions-listener" class="headerlink" title="$watchGroup(watchExpressions, listener)"></a>$watchGroup(watchExpressions, listener)</h2><p><code>$watchGroup</code>是scope上的另一个函数，他是<code>$watch</code>的功能扩展。他可以监听一个数组中的多个元素，当其中的人一个发生改变时，都会被监听到。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$scope.v1 = <span class="string">'a'</span>;</div><div class="line">$scope.v2 = <span class="string">'a'</span>;</div><div class="line">$scope.$watchGroup([<span class="string">'v1'</span>, <span class="string">'v2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">newValues, oldValues</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(newValues, oldValues);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.4.png" alt=""><br><img src="/image/2018-05-21.5.png" alt=""><br><img src="/image/2018-05-21.6.png" alt=""></p>
-<h2 id="watchCollection-obj-listener"><a href="#watchCollection-obj-listener" class="headerlink" title="$watchCollection(obj, listener)"></a>$watchCollection(obj, listener)</h2><p><code>$watchCollection</code>也是scope上的一个函数，同样为<code>$watch</code>的扩展。他可以监听一个对象，当对象中的任一个属性发生改变额时候，都会被监听到。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>查询的实现使用了过滤器，然后还要实现分页。这个过滤器如果还是像以前一样在V层使用过滤器，那么就会先实现分页，然后再去查询的时候，分页的数据不会改变。比如查询出10条数据，那么分页获取的数据总数就是10条，然后过滤掉3条，这时页面上就会显示7条数据，但是分页获取的数据总数还是10条，这样就出现了数据的不同步。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h3 id="1-如何在controller使用过滤器"><a href="#1-如何在controller使用过滤器" class="headerlink" title="1.如何在controller使用过滤器?"></a>1.如何在<code>controller</code>使用过滤器?</h3><p>首先先介绍一下过滤器在controller中的使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'myApp'</span>)</div><div class="line">	.controller(<span class="string">'myController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$filter</span>) </span>&#123;</div><div class="line">	...</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>首先在开始的时候将<code>$filter</code>注入进来</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'myApp'</span>)</div><div class="line">	.controller(<span class="string">'myController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$filter</span>) </span>&#123;</div><div class="line">		$filter(<span class="string">'myFilter'</span>)(param1, param2...);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>然后使用$filter来注入你自己定义的过滤器，第一个括号中是个自己的过滤器的名子，后面的过滤器的参数。值得注意的是，<strong>这里我们要将过滤的对象放在第一个参数的位置。</strong></p>
+<h3 id="2-解决问题"><a href="#2-解决问题" class="headerlink" title="2.解决问题"></a>2.解决问题</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">tbody</span> <span class="attr">ng-repeat</span>=<span class="string">"person in persons | yunzhiPersonnel: filterParams.qualifierCertificateType: filterParams.validityDate | yunzhiQualifierNumber: filterParams.number"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>原来的过滤器我是这么使用的。现在将过滤器放到controller中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="comment">// 提交查询</span></div><div class="line">self.submit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $scope.filterParams = self.getFilterParams(); <span class="comment">// 设置过滤条件</span></div><div class="line">    PersonnelPersonnelsupervisefileService.getAllBySpecification(self.getQueryParams(), <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        $scope.persons = data; <span class="comment">// 传入v层</span></div><div class="line"></div><div class="line">        <span class="comment">// 在这里调用过滤器，原因是为了适应分页的使用，需要在分页之前执行完查询，否则会出现少数据的现象。</span></div><div class="line">        $scope.persons = $filter(<span class="string">'yunzhiPersonnel'</span>)($scope.persons, $scope.filterParams.qualifierCertificateType, $scope.filterParams.validityDate);</div><div class="line">        $scope.persons = $filter(<span class="string">'yunzhiQualifierNumber'</span>)($scope.persons, $scope.filterParams.number);</div><div class="line"></div><div class="line">        self.reload(); <span class="comment">// 重新加载，显示分页</span></div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这样在每次查询的时候，都先将查询的结果过滤一下，然后再对过滤的结果进行分页，就不会在出现数据对不上的现象了。</p>
 <blockquote>
-<p><code>obj</code> 部分同样可以是String或是function。</p>
+<p>官方参考：<a href="https://docs.angularjs.org/api/ng/filter/filter" target="_blank" rel="external">https://docs.angularjs.org/api/ng/filter/filter</a></p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$scope.people = &#123;</div><div class="line">    name: <span class="string">'zhangsan'</span>,</div><div class="line">    sex: <span class="string">'男'</span></div><div class="line">&#125;;</div><div class="line">$scope.dataCount = <span class="number">0</span>;</div><div class="line"></div><div class="line">$scope.$watchCollection(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">    $scope.dataCount = $scope.dataCount + <span class="number">1</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="/image/2018-05-21.7.png" alt=""><br><img src="/image/2018-05-21.8.png" alt=""></p>
-<p>这个方法的功能跟使用<code>$watch</code>的第三个参数是一样的效果：当<code>$watch</code>的第三个参数为true的时候，就会实现这样的效果。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;&#125;, <span class="literal">true</span>);</div></pre></td></tr></table></figure>
-<p>上一次我们已经提到过了，在这里使用true，表示新旧值将使用<code>angular.equals</code>来进行判等。在官方文档中有这么一句话：</p>
-<blockquote>
-<p>Both objects or values are of the same type and <code>all of their properties</code> are equal by comparing them with angular.equals.</p>
-</blockquote>
-<p>可以看到，这里的判等需要每个属性都相等。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>灵活的使用$watch以及相关的方法，会使你的展现的功能富有趣味，富有灵活性。</p>
-<p><strong> 官方参考：<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch" target="_blank" rel="external">https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watch</a></strong></p>
 
       
     </div>
@@ -441,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/19/angular-watch/" rel="next" title="Angularjs中的$watch">
-                <i class="fa fa-chevron-left"></i> Angularjs中的$watch
+              <a href="/2018/05/30/filter/" rel="next" title="实现 n:1 的查询">
+                <i class="fa fa-chevron-left"></i> 实现 n:1 的查询
               </a>
             
           </div>
@@ -450,10 +431,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/27/selected-by-default/" rel="prev" title="关于实现下拉选框的默认选中问题">
-                关于实现下拉选框的默认选中问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -608,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch监听函数"><span class="nav-number">1.</span> <span class="nav-text">$watch监听函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchGroup-watchExpressions-listener"><span class="nav-number">2.</span> <span class="nav-text">$watchGroup(watchExpressions, listener)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watchCollection-obj-listener"><span class="nav-number">3.</span> <span class="nav-text">$watchCollection(obj, listener)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">2.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-如何在controller使用过滤器"><span class="nav-number">2.1.</span> <span class="nav-text">1.如何在controller使用过滤器?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-解决问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.解决问题</span></a></li></ol></li></ol></div>
             
 
           </div>

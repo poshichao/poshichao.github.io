@@ -285,6 +285,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/patch-and-put/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Po Shichao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵先生 的进阶之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/09/patch-and-put/" itemprop="url">patch-and-put</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-09T11:09:54+08:00">
+                2018-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在写后台更新接口的时候，定义路由使用<code>@PutMapping</code>，这个注解，但是，后来又改成的<code>@PatchMapping</code>，所以就查了下两者的区别。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>原来在进行更新操作的时候，都是使用<code>put</code>方法来进行请求的，但是这次在写更新的时候，只需要更新一个字段，所以使用了<code>patch</code>方法，那么，<code>patch</code>和<code>put</code>这两者有什么区别呢？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/09/patch-and-put/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/postmapping-param/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,20 +480,14 @@
 
       
         
-          
-            <p><code>PostMapping</code>这是Spring中的定义路由的注解，以前没有关注过这个注解的默认值，所以在实现的时候就显得不那么灵活。</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>有一个路由是这么定义的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/"</span>)</div></pre></td></tr></table></figure>
-<p>没有实际的路由，只有一个”/“，这时候，我们可以使用@PostMapping的默认值来代替上面的写法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@PostMapping</span></div></pre></td></tr></table></figure>
-<p>然后我们在访问的时候，什么也不用做修改，和上面那种写法的访问路由完全相同。</p>
-<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>发现这个现象的时候，首先就去看了一下这个注解的默认值。</p>
-<p><img src="/image/2018-06-08.1.png" alt=""></p>
-<p>默认值是<code>&quot;&quot;</code>,所以什么都不写就相当于<code>@PostMapping(&quot;&quot;)</code>.这时我们访问这个方法的时候路由应该这么写：<code>/XXX</code>。</p>
-<h2 id="多余的”-“"><a href="#多余的”-“" class="headerlink" title="多余的”/“"></a>多余的”/“</h2><p>在将路由修改后，本应该将单元测试的访问路由一起修改的，但是我在第一遍进行单元测试的时候，并没有修改原来的路由：<code>/XXX/</code>。而单元测试依然通过。</p>
-<p>所以在处理最后一个<code>”/“</code>的时候，在没有匹配的情况下，他会自动的将斜杠去掉。这就好像我们在浏览器中输入<code>www.baidu.com/</code>，这时候我们依然能访问的是<code>www.baidu.com</code>。Spring为我们将多余的斜杠去除了。</p>
-
-          
+          <p><code>PostMapping</code>这是Spring中的定义路由的注解，以前没有关注过这个注解的默认值，所以在实现的时候就显得不那么灵活。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/08/postmapping-param/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1399,131 +1518,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/abstract-class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Po Shichao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="喵先生 的进阶之路">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/10/abstract-class/" itemprop="url">项目心得(五)——抽象类</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T16:21:36+08:00">
-                2018-05-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在实际的项目中我们经常会遇到两个实体关系是多对多的，这个时候同长会有一张用来维护实体关系的中间表。这次我就遇到了一个多对多的问题，而且其中还掺杂了抽象类干扰。</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>两个实体：角色和菜单，多对多关联，由一张中间表来维护。现在要修改其中其中菜单的关联，将菜单换成他的基类菜单。出现问题的位置：通过角色获取所有的菜单。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/10/abstract-class/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1578,7 +1572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -1591,7 +1585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>

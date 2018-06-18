@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="thinkphp," />
 
 
 
@@ -125,19 +125,17 @@
 
 
 
-<meta name="description" content="今天修改了项目中的标准器的添加方法,将检定时间设置为一年后.内容虽少,但对于编程起步的我,依然收货不小. 问题描述标准器实体中,有一个字段是 检定有效期至,也就是下一次检定日期,检定的周期是一年,所以,在新增一个标准器的时候,要将该字段设置为一年以后.">
-<meta name="keywords" content="java">
+<meta name="description" content="在做实验的时候，要求写一个考试管理系统，这时候就必不可少的要涉及到实体之间的关系,而其中比较难处理的就是多对多关系。 问题描述两个实体，教师和课程，关系多对多。要实现在新建教师的时候能为教师添加多个课程，可编辑，删除时删除相应的关系。">
+<meta name="keywords" content="thinkphp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目心得(二)">
-<meta property="og:url" content="http://yoursite.com/2018/03/13/project-experience-2/index.html">
+<meta property="og:title" content="Thinkphp 实现多对多">
+<meta property="og:url" content="http://yoursite.com/2018/06/17/php-manytomany/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="今天修改了项目中的标准器的添加方法,将检定时间设置为一年后.内容虽少,但对于编程起步的我,依然收货不小. 问题描述标准器实体中,有一个字段是 检定有效期至,也就是下一次检定日期,检定的周期是一年,所以,在新增一个标准器的时候,要将该字段设置为一年以后.">
-<meta property="og:image" content="http://yoursite.com/image/2018-03-13.1.png">
-<meta property="og:updated_time" content="2018-03-13T13:47:41.795Z">
+<meta property="og:description" content="在做实验的时候，要求写一个考试管理系统，这时候就必不可少的要涉及到实体之间的关系,而其中比较难处理的就是多对多关系。 问题描述两个实体，教师和课程，关系多对多。要实现在新建教师的时候能为教师添加多个课程，可编辑，删除时删除相应的关系。">
+<meta property="og:updated_time" content="2018-06-18T03:02:30.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目心得(二)">
-<meta name="twitter:description" content="今天修改了项目中的标准器的添加方法,将检定时间设置为一年后.内容虽少,但对于编程起步的我,依然收货不小. 问题描述标准器实体中,有一个字段是 检定有效期至,也就是下一次检定日期,检定的周期是一年,所以,在新增一个标准器的时候,要将该字段设置为一年以后.">
-<meta name="twitter:image" content="http://yoursite.com/image/2018-03-13.1.png">
+<meta name="twitter:title" content="Thinkphp 实现多对多">
+<meta name="twitter:description" content="在做实验的时候，要求写一个考试管理系统，这时候就必不可少的要涉及到实体之间的关系,而其中比较难处理的就是多对多关系。 问题描述两个实体，教师和课程，关系多对多。要实现在新建教师的时候能为教师添加多个课程，可编辑，删除时删除相应的关系。">
 
 
 
@@ -167,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/13/project-experience-2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/17/php-manytomany/"/>
 
 
 
 
 
-  <title>项目心得(二) | 喵先生 的进阶之路</title>
+  <title>Thinkphp 实现多对多 | 喵先生 的进阶之路</title>
   
 
 
@@ -290,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/project-experience-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/php-manytomany/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -307,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">项目心得(二)</h1>
+          <h1 class="post-title" itemprop="name headline">Thinkphp 实现多对多</h1>
         
 
         <div class="post-meta">
@@ -319,8 +317,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T20:18:20+08:00">
-                2018-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-17T10:04:04+08:00">
+                2018-06-17
               </time>
             
 
@@ -357,30 +355,20 @@
       
 
       
-        <p>今天修改了项目中的标准器的添加方法,将检定时间设置为一年后.内容虽少,但对于编程起步的我,依然收货不小.</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>标准器实体中,有一个字段是 <code>检定有效期至</code>,也就是下一次检定日期,检定的周期是一年,所以,在新增一个标准器的时候,要将该字段设置为一年以后.</p>
+        <p>在做实验的时候，要求写一个考试管理系统，这时候就必不可少的要涉及到实体之间的关系,而其中比较难处理的就是多对多关系。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>两个实体，教师和课程，关系多对多。要实现在新建教师的时候能为教师添加多个课程，可编辑，删除时删除相应的关系。</p>
 <a id="more"></a>
-<p><img src="/image/2018-03-13.1.png" alt=""></p>
-<h2 id="实现构想"><a href="#实现构想" class="headerlink" title="实现构想"></a>实现构想</h2><p>由于有上一次的经验,所以知道可以很容易的获取系统时间,然后将年份加一,月和日不变,这样就将 <code>检定有效期至</code> 设为一年以后.</p>
-<h2 id="初步解决"><a href="#初步解决" class="headerlink" title="初步解决"></a>初步解决</h2><p>有了上面的构想,代码实现就比较简单了.直接利用 <code>calendar</code> 类来帮助获取当前时间,进而获取年月日.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">logger.debug(<span class="string">"获取当前年月日"</span>);</div><div class="line">Calendar calendar = Calendar.getInstance();</div><div class="line"><span class="keyword">int</span> year = calendar.get(Calendar.YEAR) + <span class="number">1</span> - <span class="number">1900</span>;</div><div class="line"><span class="keyword">int</span> mounth = calendar.get(Calendar.MONTH);</div><div class="line"><span class="keyword">int</span> day = calendar.get(Calendar.DAY_OF_MONTH);</div><div class="line"></div><div class="line">logger.debug(<span class="string">"将下次检定日期设置为一年后"</span>);</div><div class="line">Date date = <span class="keyword">new</span> Date(year,mounth,day);</div><div class="line">standardDevice.setNextCheckDate(date);</div><div class="line"></div><div class="line">logger.debug(<span class="string">"持久化"</span>);</div><div class="line"><span class="keyword">return</span> standardDeviceRepository.save(standardDevice);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这里需要解释一下的是,利用calendar类得到的对象和项目中的关键子类型不同,所以中间将年月日取出来进行了拼接,得到需要的类型.<br>而 <code>Date()</code> 这个构造函数的参数一个参数- <code>year</code> ,它的范围是0-8099,0代表1900年,所以上面的年份减去了一个1900.</p>
-</blockquote>
-<h2 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h2><p>显然,上面的代码并不够简介,而且也并不容易理解.时间一久,这个代码是怎么回事,可能自己还要想上好半天.怎么办?重构!</p>
-<p>首先, <code>calendar</code> 这个类有一个 <code>add</code> 函数,它可以直接实现年份加一,所以,不用将年份获取出来再加一了;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">calendar.add(Calendar.YEAR, <span class="number">1</span>);</div></pre></td></tr></table></figure>
-<p>其次, <code>calendar</code> 对象的 <code>getTimeInMillis</code>函数,可以直接将Calendar类型转换为我们需要的类型,所以,已不用费劲的拼接了.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">calendar.getTimeInMillis()</div></pre></td></tr></table></figure>
-<p>重构后的代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">logger.debug(<span class="string">"将下次检定日期设置为一年后"</span>);</div><div class="line">Calendar calendar = Calendar.getInstance();</div><div class="line">calendar.add(Calendar.YEAR, <span class="number">1</span>);</div><div class="line">standardDevice.setNextCheckDate(<span class="keyword">new</span> Date(calendar.getTimeInMillis()));</div></pre></td></tr></table></figure>
-<p>很明显,重构后的代码比开始的代码更加简介,更加便于理解与维护.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次暴露的主要问题是,对于 <code>java</code> 这门语言的使用还不够熟练,所以开始使用方法错误.</p>
-<p>这次的主要收获:</p>
-<p>1.好的代码要简洁,要易于理解.</p>
-<p>2.对于编程语言的熟练度,影响你解决问题的速度.</p>
-<p>3.多尝试看官方API文档.</p>
-<p><strong>关于calendar类的官方文档参考:<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html" target="_blank" rel="external">https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html</a></strong></p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="关联定义"><a href="#关联定义" class="headerlink" title="关联定义"></a>关联定义</h3><p>首先，我们肯定要先定义教师和课程的多对多。在教师的模型定义如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">courses</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="string">'Course'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就定义了多对多关系，但是还没有结束，还需要去数据库中建立一张中间表<code>teacher_course</code>，然后定义表中字段。到此，关系维护结束。</p>
+<h3 id="关联添加"><a href="#关联添加" class="headerlink" title="关联添加"></a>关联添加</h3><p>因为我们在添加关系的时候，课程和教师都已经存好了，所以这时候我们只用操作中间表。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$post = Request::instance()-&gt;post();</div><div class="line"></div><div class="line"><span class="comment">// 获取要保存的关联课程</span></div><div class="line">$courseName = $post[<span class="string">'course'</span>]</div><div class="line">$Course     = Course::get([<span class="string">'name'</span> =&gt; $courseName]);</div><div class="line"></div><div class="line">$Teacher = <span class="keyword">new</span> Teacher();</div><div class="line"></div><div class="line">$Teacher-&gt;name        = $post[<span class="string">'name'</span>];</div><div class="line">$Teacher-&gt;sex         = $post[<span class="string">'sex'</span>];</div><div class="line">$Teacher-&gt;work_number = $post[<span class="string">'work_number'</span>];</div><div class="line">$Teacher-&gt;password    = $post[<span class="string">'password'</span>];</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($Teacher-&gt;save()) &#123;</div><div class="line">    <span class="comment">// 在教师添加成功后修改中间表</span></div><div class="line">    $Teacher-&gt;courses()-&gt;attach($Course-&gt;id);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;success(<span class="string">'保存成功！'</span>, <span class="string">'index'</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">'保存失败！'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>获取从V层传过来的数据，包括要保存的课程，然后当教师保存成功后再修改中间表，将教师和课程的id对应的存入中间表中。(<code>attach()</code>这个函数只会操作中间表，另外两个数据表不会被改变。)</p>
+<h3 id="关联删除"><a href="#关联删除" class="headerlink" title="关联删除"></a>关联删除</h3><p>同样的关联删除只能操作中间表。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="keyword">if</span> ($Teacher-&gt;delete()) &#123;</div><div class="line">    <span class="comment">// 获取所有的关联课程，依次删除</span></div><div class="line">    $courses = $Teacher-&gt;courses;</div><div class="line">    <span class="keyword">foreach</span> ($courses <span class="keyword">as</span> $course) &#123;</div><div class="line">        $Teacher-&gt;courses()-&gt;detach($course-&gt;id);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;success(<span class="string">'删除成功！'</span>, url(<span class="string">'index'</span>));</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error(<span class="string">'删除失败！'</span>);</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>遍历获取所有的与删除的教师关联的课程，然后遍历删除。(同样，<code>detach()</code>函数也只会操作中间表)</p>
+<hr>
+<p><strong>官方参考：</strong><br><a href="https://www.kancloud.cn/manual/thinkphp5/142359" target="_blank" rel="external">https://www.kancloud.cn/manual/thinkphp5/142359</a></p>
 
       
     </div>
@@ -422,7 +410,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/thinkphp/" rel="tag"># thinkphp</a>
           
         </div>
       
@@ -435,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/11/project-experience/" rel="next" title="项目心得(一)">
-                <i class="fa fa-chevron-left"></i> 项目心得(一)
+              <a href="/2018/06/14/install-nginx/" rel="next" title="Ubuntu16.04 安装nginx">
+                <i class="fa fa-chevron-left"></i> Ubuntu16.04 安装nginx
               </a>
             
           </div>
@@ -444,10 +432,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/19/project-experience-3/" rel="prev" title="项目心得(三)">
-                项目心得(三) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现构想"><span class="nav-number">2.</span> <span class="nav-text">实现构想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步解决"><span class="nav-number">3.</span> <span class="nav-text">初步解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码重构"><span class="nav-number">4.</span> <span class="nav-text">代码重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">2.</span> <span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关联定义"><span class="nav-number">2.1.</span> <span class="nav-text">关联定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联添加"><span class="nav-number">2.2.</span> <span class="nav-text">关联添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联删除"><span class="nav-number">2.3.</span> <span class="nav-text">关联删除</span></a></li></ol></li></ol></div>
             
 
           </div>

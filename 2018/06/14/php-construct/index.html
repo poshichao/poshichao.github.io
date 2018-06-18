@@ -136,7 +136,7 @@
 <meta property="og:image" content="http://yoursite.com/image/2018-06-15.2.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-06-15.3.png">
 <meta property="og:image" content="http://yoursite.com/image/2018-06-15.4.png">
-<meta property="og:updated_time" content="2018-06-15T12:04:52.100Z">
+<meta property="og:updated_time" content="2018-06-18T02:03:27.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="继承遗留问题">
 <meta name="twitter:description" content="这次的软件工程大实验选择使用了thinkphp进行编写。虽然实验写得比较粗糙，但是在实现过程中还是遇到了几个问题的。 问题描述整个系统的界面是采用继承的方式实现的，页面的菜单部分都使用同样的代码。菜单上有一个功能是用户信息。效果是点击它，就可以修改当前登录用户的信息。">
@@ -377,7 +377,8 @@
 <p><img src="/image/2018-06-15.4.png" alt=""></p>
 <p>原因找到了，解决起来就简单了。</p>
 <p>控制器使用了继承，有一个基本控制器，在这个基本控制器中定义一个构造函数，通过构造函数获取当前登录的用户id。相当在所有的控制器中都定义了<code>$teacherId</code>了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过解决这个问题，又一次发现了快速找到问题原因的重要性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.通过解决这个问题，又一次发现了快速找到问题原因的重要性。</p>
+<p>2.不要想当然的定位错误。</p>
 
       
     </div>
@@ -525,7 +526,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>

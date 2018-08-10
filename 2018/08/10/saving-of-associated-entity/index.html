@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="mysql," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -125,17 +125,21 @@
 
 
 
-<meta name="description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
-<meta name="keywords" content="mysql">
+<meta name="description" content="问题产生最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL：判断数据表中字段是否存在">
-<meta property="og:url" content="http://yoursite.com/2018/05/07/sql-check-if-exist/index.html">
+<meta property="og:title" content="存在关联实体的保存问题">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/saving-of-associated-entity/index.html">
 <meta property="og:site_name" content="喵先生 的进阶之路">
-<meta property="og:description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
-<meta property="og:updated_time" content="2018-05-11T12:41:12.201Z">
+<meta property="og:description" content="问题产生最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。">
+<meta property="og:image" content="http://yoursite.com/image/2018-08-10.1.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-08-10.2.png">
+<meta property="og:image" content="http://yoursite.com/image/2018-08-10.3.png">
+<meta property="og:updated_time" content="2018-08-10T11:39:32.886Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL：判断数据表中字段是否存在">
-<meta name="twitter:description" content="最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。">
+<meta name="twitter:title" content="存在关联实体的保存问题">
+<meta name="twitter:description" content="问题产生最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。">
+<meta name="twitter:image" content="http://yoursite.com/image/2018-08-10.1.png">
 
 
 
@@ -165,13 +169,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/07/sql-check-if-exist/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/10/saving-of-associated-entity/"/>
 
 
 
 
 
-  <title>SQL：判断数据表中字段是否存在 | 喵先生 的进阶之路</title>
+  <title>存在关联实体的保存问题 | 喵先生 的进阶之路</title>
   
 
 
@@ -288,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/07/sql-check-if-exist/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/saving-of-associated-entity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Po Shichao">
@@ -305,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL：判断数据表中字段是否存在</h1>
+          <h1 class="post-title" itemprop="name headline">存在关联实体的保存问题</h1>
         
 
         <div class="post-meta">
@@ -317,8 +321,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-07T20:24:39+08:00">
-                2018-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T16:23:23+08:00">
+                2018-08-10
               </time>
             
 
@@ -355,23 +359,27 @@
       
 
       
-        <p>最近的项目中，有个需求需要重新创建字段，但是老的版本已经上线，原来的数据我们不能给它破坏，所以就需要判断一下是否已经存在那个字段，如果不存在就新建一个，如果存在就什么也不做。</p>
+        <h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><p>最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。</p>
 <a id="more"></a>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>解决这个问题的时候，google了不少的办法，但是没有成功。无论是使用<code>if</code>条件判断，还是使用<code>exist</code>函数的时候都会报错。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if Not exists(<span class="keyword">select</span> * <span class="keyword">from</span> sysobjects <span class="keyword">where</span> <span class="keyword">id</span>=object_id(<span class="string">'tableName'</span>) <span class="keyword">and</span> <span class="keyword">name</span>=<span class="string">'columnName'</span> ) <span class="keyword">then</span></div><div class="line"><span class="keyword">begin</span> </div><div class="line">alert <span class="keyword">table</span> tableName <span class="keyword">add</span> columnName</div><div class="line"><span class="keyword">end</span>;</div></pre></td></tr></table></figure>
-<p>这个时候会报出字段不存在的错，在执行<code>select</code>这条命令的时候，由于数据表中还没有columnName这个字段，也就不认识columnName，所以报错。</p>
-<p>类似的，中间还出过几个错，在这里就不一一列举了。</p>
-<h2 id="最终的解决办法"><a href="#最终的解决办法" class="headerlink" title="最终的解决办法"></a>最终的解决办法</h2><p>最后的解决办法是在一个mysql的官方讨论区里找到的。在这里先给出解法。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> @dbname = <span class="keyword">DATABASE</span> ( );</div><div class="line"><span class="keyword">SET</span> @tablename = <span class="string">"tableName"</span>;</div><div class="line"><span class="keyword">SET</span> @columnname = <span class="string">"columnName"</span>;</div><div class="line"><span class="keyword">SET</span> @preparedStatement = (</div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">IF</span> (</div><div class="line">	(</div><div class="line">		<span class="keyword">SELECT</span></div><div class="line">		<span class="keyword">COUNT</span>( * ) </div><div class="line">		<span class="keyword">FROM</span></div><div class="line">		INFORMATION_SCHEMA.COLUMNS </div><div class="line">		<span class="keyword">WHERE</span></div><div class="line">		( table_name = @tablename ) </div><div class="line">		<span class="keyword">AND</span> ( table_schema = @dbname ) </div><div class="line">		<span class="keyword">AND</span> ( column_name = @columnname ) </div><div class="line">		) &gt; <span class="number">0</span>,</div><div class="line">		<span class="string">"SELECT 1"</span>,</div><div class="line">		<span class="keyword">CONCAT</span>( <span class="string">"ALTER TABLE "</span>, @tablename, <span class="string">" ADD "</span>, @columnname, <span class="string">" VARCHAR(31) not null;"</span> ) </div><div class="line">	) </div><div class="line">);</div><div class="line"><span class="keyword">PREPARE</span> alterIfNotExists </div><div class="line"><span class="keyword">FROM</span></div><div class="line">	@preparedStatement;</div><div class="line"><span class="keyword">EXECUTE</span> alterIfNotExists;</div><div class="line"><span class="keyword">DEALLOCATE</span> <span class="keyword">PREPARE</span> alterIfNotExists;</div></pre></td></tr></table></figure>
-<p>下面我做下简单解释。</p>
-<blockquote>
-<p>1.首先，定义了三个变量，分别为数据库名，表名，字段名，这是后面会重复用到的，所以在这里进行定义。<br>2.然后定义了另一个变量，这个变量主要执行查找<code>select</code>，查找是否存在我们要添加的字段的相关记录。<br>3.最后是这个解法的最特别之处：定义一个预处理变量，这个变量就是处理上面我们的查找的那个变量，然后执行预处理。最后Deallocate一下，释放所使用的数据库资源</p>
-</blockquote>
-<h2 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a>预处理语句</h2><p>好了，问题解决了，但是肯定还是有疑惑的：什么是预处理语句呢？</p>
-<p><strong> MySQL官方将<code>prepare</code>、<code>execute</code>、<code>deallocate</code>统称为<code>PREPARE STATEMENT</code>。我们称之为【预处理语句】</strong></p>
-<p>预处理，顾名思义，预先处理。他会在sql执行之前进行语句解析，然后统一执行一次或多次。通过上面的例子我们可以看到，预处理其实非常简单。</p>
-<p>笔者对sql研究较少，理解有限，所以在这里给出预处理的<a href="https://dev.mysql.com/doc/refman/8.0/en/sql-syntax-prepared-statements.html" target="_blank" rel="external">官方参考</a>。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次编写sql语句，感受到了sql的博大，从最开始比较水比较基础的sql语句，到后面使用预处理，语句质量提升了一大步，对sql又产生了兴趣。</p>
+<p><img src="/image/2018-08-10.1.png" alt=""></p>
+<p>图中红框的位置应该有一个附加参量的编辑部分，但现在没有出现。然后从次开始问题的查找。</p>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><h3 id="1-检查前台问题"><a href="#1-检查前台问题" class="headerlink" title="1.检查前台问题"></a>1.检查前台问题</h3><p>首先是先检查一下是否是前台出错了，因为这是个动态的表单，所以存在<code>ng-show</code>，检查无误。附加参量的位置使用了<code>ng-repeat</code>，也就是说，只要获取到了数据，附加参量就会显示。</p>
+<h3 id="2-检查jsonview"><a href="#2-检查jsonview" class="headerlink" title="2.检查jsonview"></a>2.检查jsonview</h3><p>调用的是<code>get</code>方法，所以可能是相应的实体上没有添加jsonview，所以在前台没有获取到对应的数据。将所有的关联实体都添加上jsonview后，依然不好使。也不是这个问题。</p>
+<h3 id="3-打印获取的对象"><a href="#3-打印获取的对象" class="headerlink" title="3.打印获取的对象"></a>3.打印获取的对象</h3><p><img src="/image/2018-08-10.2.png" alt=""></p>
+<p>获取的附加参量是一个空数组。到这里可以知道，<code>get</code>方法没有出错。那么既然获取没有问题，那么就只能是保存的时候出现了问题。</p>
+<h3 id="4-查找save的错误"><a href="#4-查找save的错误" class="headerlink" title="4.查找save的错误"></a>4.查找save的错误</h3><p>这个保存的问题还是花了挺长时间才找到的。最后还是因为巧合才发现问题的原因。</p>
+<p>最开始，我的更新方法update在保存的时候使用的是jpa自带的保存方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Long id, NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    ...   </div><div class="line">    logger.debug(<span class="string">"持久化更新内容"</span>);</div><div class="line">    nonMandatoryInstrumentRepository.save(oldNonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里直接使用<code>repository</code>的save方法，然后我先点击了一下编辑，然后保存。在点击编辑，发现原来的参量也不见了。</p>
+<p><img src="/image/2018-08-10.3.png" alt=""></p>
+<p>然后我将update的保存方法也换成M层的保存方法。就和最上面的问题一样了：参量能存上，但是附加参量存不上。</p>
+<p>所以我就去看了一下M层的save是怎么写的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    logger.debug(<span class="string">"为参数添加非强检器具"</span>);</div><div class="line">    <span class="keyword">for</span>(Parameter parameter: nonMandatoryInstrument.getParameterSet()) &#123;</div><div class="line">        parameter.setNonMandatoryInstrument(nonMandatoryInstrument);</div><div class="line">    &#125;</div><div class="line">    nonMandatoryInstrumentRepository.save(nonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发现在保存之前先为每个参量添加了<code>非强检器具</code>这个属性。看到这里我就知道问题所在了。保存的时候没有设置附加参量的参量属性。</p>
+<h2 id="原因猜测"><a href="#原因猜测" class="headerlink" title="原因猜测"></a>原因猜测</h2><p>首先我们知道非强检器具和参量是<code>一对多</code>的关系。参量和附加参量是<code>一对多</code>的关系。我们在建实体的时候，避免生成中间表，使用了<code>mappedBy</code>这个属性，交由一的一方来维护表。这样就会在参量的表中生成一个非强检器具的外键，所以如果在保存的时候不为参量添加非强检器具，这个外键就是空的。所以在查询的时候就不能关联查询出参量。参量和附加参量也是这个道理。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>解决办法很简单，在保存之前，为附加参量设置参量这个属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    logger.debug(<span class="string">"为参数添加非强检器具"</span>);</div><div class="line">    <span class="keyword">for</span>(Parameter parameter: nonMandatoryInstrument.getParameterSet()) &#123;</div><div class="line">        parameter.setNonMandatoryInstrument(nonMandatoryInstrument);</div><div class="line">        logger.debug(<span class="string">"为附加参量添加参量"</span>);</div><div class="line">        <span class="keyword">for</span> (AdditionalParameter additionalParameter: parameter.getAdditionalParameterSet()) &#123;</div><div class="line">            additionalParameter.setParameter(parameter);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    nonMandatoryInstrumentRepository.save(nonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的问题解决时间还是比较长的，虽然最终问题是解决了，但是还是暴露出比较多的问题。一个就是对已知的知识掌握的不够灵活，另一个就是纠错差错能力比较弱。</p>
 
       
     </div>
@@ -413,7 +421,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -426,8 +434,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/07/entity-inhetitance/" rel="next" title="Hibernate 实体映射的继承关系">
-                <i class="fa fa-chevron-left"></i> Hibernate 实体映射的继承关系
+              <a href="/2018/08/06/dynamic-collection-form-validation/" rel="next" title="动态表单集合验证">
+                <i class="fa fa-chevron-left"></i> 动态表单集合验证
               </a>
             
           </div>
@@ -435,10 +443,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/10/abstract-class/" rel="prev" title="项目心得(五)——抽象类">
-                项目心得(五)——抽象类 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -600,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终的解决办法"><span class="nav-number">2.</span> <span class="nav-text">最终的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理语句"><span class="nav-number">3.</span> <span class="nav-text">预处理语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题产生"><span class="nav-number">1.</span> <span class="nav-text">问题产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题定位"><span class="nav-number">2.</span> <span class="nav-text">问题定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-检查前台问题"><span class="nav-number">2.1.</span> <span class="nav-text">1.检查前台问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-检查jsonview"><span class="nav-number">2.2.</span> <span class="nav-text">2.检查jsonview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-打印获取的对象"><span class="nav-number">2.3.</span> <span class="nav-text">3.打印获取的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-查找save的错误"><span class="nav-number">2.4.</span> <span class="nav-text">4.查找save的错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因猜测"><span class="nav-number">3.</span> <span class="nav-text">原因猜测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">4.</span> <span class="nav-text">问题解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

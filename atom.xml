@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   <link href="%5Bobject%20Object%5D" rel="hub"/>
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-10T02:50:43.660Z</updated>
+  <updated>2018-08-10T11:39:32.886Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>存在关联实体的保存问题</title>
+    <link href="http://yoursite.com/2018/08/10/saving-of-associated-entity/"/>
+    <id>http://yoursite.com/2018/08/10/saving-of-associated-entity/</id>
+    <published>2018-08-10T08:23:23.000Z</published>
+    <updated>2018-08-10T11:39:32.886Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题产生"><a href="#问题产生" class="headerlink" title="问题产生"></a>问题产生</h2><p>最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。</p><a id="more"></a><p><img src="/image/2018-08-10.1.png" alt=""></p><p>图中红框的位置应该有一个附加参量的编辑部分，但现在没有出现。然后从次开始问题的查找。</p><h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><h3 id="1-检查前台问题"><a href="#1-检查前台问题" class="headerlink" title="1.检查前台问题"></a>1.检查前台问题</h3><p>首先是先检查一下是否是前台出错了，因为这是个动态的表单，所以存在<code>ng-show</code>，检查无误。附加参量的位置使用了<code>ng-repeat</code>，也就是说，只要获取到了数据，附加参量就会显示。</p><h3 id="2-检查jsonview"><a href="#2-检查jsonview" class="headerlink" title="2.检查jsonview"></a>2.检查jsonview</h3><p>调用的是<code>get</code>方法，所以可能是相应的实体上没有添加jsonview，所以在前台没有获取到对应的数据。将所有的关联实体都添加上jsonview后，依然不好使。也不是这个问题。</p><h3 id="3-打印获取的对象"><a href="#3-打印获取的对象" class="headerlink" title="3.打印获取的对象"></a>3.打印获取的对象</h3><p><img src="/image/2018-08-10.2.png" alt=""></p><p>获取的附加参量是一个空数组。到这里可以知道，<code>get</code>方法没有出错。那么既然获取没有问题，那么就只能是保存的时候出现了问题。</p><h3 id="4-查找save的错误"><a href="#4-查找save的错误" class="headerlink" title="4.查找save的错误"></a>4.查找save的错误</h3><p>这个保存的问题还是花了挺长时间才找到的。最后还是因为巧合才发现问题的原因。</p><p>最开始，我的更新方法update在保存的时候使用的是jpa自带的保存方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Long id, NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    ...   </div><div class="line">    logger.debug(<span class="string">"持久化更新内容"</span>);</div><div class="line">    nonMandatoryInstrumentRepository.save(oldNonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>这里直接使用<code>repository</code>的save方法，然后我先点击了一下编辑，然后保存。在点击编辑，发现原来的参量也不见了。</p><p><img src="/image/2018-08-10.3.png" alt=""></p><p>然后我将update的保存方法也换成M层的保存方法。就和最上面的问题一样了：参量能存上，但是附加参量存不上。</p><p>所以我就去看了一下M层的save是怎么写的：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    logger.debug(<span class="string">"为参数添加非强检器具"</span>);</div><div class="line">    <span class="keyword">for</span>(Parameter parameter: nonMandatoryInstrument.getParameterSet()) &#123;</div><div class="line">        parameter.setNonMandatoryInstrument(nonMandatoryInstrument);</div><div class="line">    &#125;</div><div class="line">    nonMandatoryInstrumentRepository.save(nonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>发现在保存之前先为每个参量添加了<code>非强检器具</code>这个属性。看到这里我就知道问题所在了。保存的时候没有设置附加参量的参量属性。</p><h2 id="原因猜测"><a href="#原因猜测" class="headerlink" title="原因猜测"></a>原因猜测</h2><p>首先我们知道非强检器具和参量是<code>一对多</code>的关系。参量和附加参量是<code>一对多</code>的关系。我们在建实体的时候，避免生成中间表，使用了<code>mappedBy</code>这个属性，交由一的一方来维护表。这样就会在参量的表中生成一个非强检器具的外键，所以如果在保存的时候不为参量添加非强检器具，这个外键就是空的。所以在查询的时候就不能关联查询出参量。参量和附加参量也是这个道理。</p><h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>解决办法很简单，在保存之前，为附加参量设置参量这个属性。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(NonMandatoryInstrument nonMandatoryInstrument)</span> </span>&#123;</div><div class="line">    logger.debug(<span class="string">"为参数添加非强检器具"</span>);</div><div class="line">    <span class="keyword">for</span>(Parameter parameter: nonMandatoryInstrument.getParameterSet()) &#123;</div><div class="line">        parameter.setNonMandatoryInstrument(nonMandatoryInstrument);</div><div class="line">        logger.debug(<span class="string">"为附加参量添加参量"</span>);</div><div class="line">        <span class="keyword">for</span> (AdditionalParameter additionalParameter: parameter.getAdditionalParameterSet()) &#123;</div><div class="line">            additionalParameter.setParameter(parameter);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    nonMandatoryInstrumentRepository.save(nonMandatoryInstrument);</div><div class="line">&#125;</div></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的问题解决时间还是比较长的，虽然最终问题是解决了，但是还是暴露出比较多的问题。一个就是对已知的知识掌握的不够灵活，另一个就是纠错差错能力比较弱。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题产生&quot;&gt;&lt;a href=&quot;#问题产生&quot; class=&quot;headerlink&quot; title=&quot;问题产生&quot;&gt;&lt;/a&gt;问题产生&lt;/h2&gt;&lt;p&gt;最开始的时候，是在做非强检器具的编辑功能。添加了一个非强检器具，然后点击编辑，获取对应的对象，然后绑定在表单上，附加参量没有出现。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>动态表单集合验证</title>
@@ -414,29 +434,6 @@
     
     
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>项目心得(四)</title>
-    <link href="http://yoursite.com/2018/04/10/project-experience-4/"/>
-    <id>http://yoursite.com/2018/04/10/project-experience-4/</id>
-    <published>2018-04-10T13:31:57.000Z</published>
-    <updated>2018-04-16T11:35:02.529Z</updated>
-    
-    <content type="html"><![CDATA[<p>很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结.</p><h2 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h2><p>强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.</p><a id="more"></a><h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><h3 id="1-数据写入"><a href="#1-数据写入" class="headerlink" title="1.数据写入"></a>1.数据写入</h3><p>这里的第一个难点是逻辑的复杂.由于器具检定能力统计设计到多个相关联的实体,然后还需要通过关联的实体计算得自己的字段值,所以写入过程较为复杂.</p><p>数据写入的流程图如下:</p><p><img src="/image/2018-04-13.1.png" alt=""></p><p>首先获取所有的区域,然后按区域进行授权检定项目的初始化,将所有获取到的区域遍历一遍,获取每个区域上的授权检定项目,并按照器具类别进行分类.</p><p>将所有的授权检定项目初始化完后,我们需要计算器具的检定能力,根据不同的区域,计算不同区域上的器具检定能力.</p><p>第二个难点是数据量庞大.在我们的系统中,有上千条数据,以后还会有更多的数据.又经过上面的复杂处理,前台的后台访问的时候,就出现了500的报错.错误原因就是读取超时.这个问题我会在后面的博客中做详细的讲解.</p><h3 id="2-数据读取"><a href="#2-数据读取" class="headerlink" title="2.数据读取"></a>2.数据读取</h3><p>这个部分的难点其实并没有数据写入的复杂,但是由于我自己对于项目的功能的理解出现了点偏差,加大了问题的难度.</p><h4 id="器具的分类"><a href="#器具的分类" class="headerlink" title="器具的分类"></a>器具的分类</h4><p>首先的一个问题是这个器具检定能力的查询,他有几种查询方式,通过查询的参数不同,需要以不同的属性对其分类.比如:</p><p><img src="/image/2018-04-13.2.png" alt=""></p><p>这个问题我想到了两种解决办法.</p><ul><li><p>第一种是后台写一个方法,获取传入的参数,然后根据传入的参数判断这个这个查询应该以哪个参数进行分类.</p></li><li><p>第二种方法是前台通过点击查询条件判断传入的参数,然后调用不同的函数,每个函数对应不同的分组.</p></li></ul><p>这两种解决方法我选择了后者,原因的后者的处理更加方便了,虽然写了多个方法,但是逻辑处理更加简单.</p><h3 id="3-解决问题中遇到的问题"><a href="#3-解决问题中遇到的问题" class="headerlink" title="3.解决问题中遇到的问题"></a>3.解决问题中遇到的问题</h3><p>遇到的最大的问题是read time out,读取超时.这个问题是由于前台发起http请求访问后台,调用后台相应的方法.但这个方法长时间没有放回数据给前台,超过了前台等待的最大时间.</p><h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>我们程序运行慢,很大程度上的瓶颈是出现在数据库的IO上,所以,想要减小程序的运行时间,就可以减小访问数据库的次数.</p><p>返回数据中有两个参数,一个是器具总数,一个是受检总数.</p><p><img src="/image/2018-04-13.3.png" alt=""></p><p>在获取器具总数的时候,调用了一个统计的方法,每次查询的每个分组都会调用一次这个方法,而这个方法每次执行都需要访问数据库,无疑为程序带来了很大的压力.所以解决的办法就是一次将所有的器具都获取出来,然后分组以后,每个分组都是一个 <code>List&lt;&gt;</code> ,器具总数也就是List的size.</p><p>在获取受检总数的时候,需要判断器具是否具有检定能力,而这是有个变量来表示的,为true表示这个器具具有检定能力.开始获取的时候,也是每次都调用一个方法,然后方法中查找检定能力为true的器具,同样的,这回多次访问数据库.解决办法同上,将所有的器具都获取出来,然后在分组后直接判断这个器具的对应字段是否为true,如果是,受检总数加一.</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个模块的部分处理的时间有点长了,也是出于对这个模块没有充分的理解,做了很多不必要的做功.但不得不说,在处理一个又一个的问题的时候,收获还是不小的.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很长一段时间没有更新博客,因为前一阵子被项目中的一个模块卡了好久.中间出现了很多问题,解决后又出新新的问题.过程可以说是十分曲折.这里也是做一下简单的总结.&lt;/p&gt;
-&lt;h2 id=&quot;功能简述&quot;&gt;&lt;a href=&quot;#功能简述&quot; class=&quot;headerlink&quot; title=&quot;功能简述&quot;&gt;&lt;/a&gt;功能简述&lt;/h2&gt;&lt;p&gt;强检器具可以被标准器具检定, 现在我们需要按条件查询具有检定能力的器具.由于之前是没有器具检定能力统计的实体的,所以我们需要通过器具, 标准装置来计算对应的查询条件是否具有检定能力,然后将新的数据存入一张新建的数据表中,供查询使用.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="angularjs" scheme="http://yoursite.com/tags/angularjs/"/>
     
   </entry>
   
